@@ -1,0 +1,212 @@
+header {
+    width: 100%;
+}
+header a{
+    text-decoration: none;
+}
+
+header .header{
+    padding: 1rem 5rem;
+}
+
+header .top-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-head);
+}
+
+header .calls a{
+    color: var(--bg-dark-blue);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+header .calls a i{
+    font-size: 1.3rem;
+}
+
+header .search-bar{
+    /* background-color: red; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 50%;
+}
+header .search-bar input{
+    border: none;
+    outline: none;
+}
+header .search-bar i{
+    cursor: pointer;
+    color: var(--bg-greenblue);
+}
+
+header .book-btn a{
+    background: var(--bg-dark-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: var(--transition-3);
+}
+header .book-btn a:hover{
+    opacity: 0.9;
+    text-decoration: underline;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+header nav{
+    padding: 0.5rem 5rem;
+}
+
+header nav .logo img{
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+}
+header nav ul{
+    list-style: none;
+    padding-left: 0rem;
+    margin-bottom: 0rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+header nav ul li a{
+    color: var(--bg-greenblue);
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+
+header nav .tabs{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+header nav .tabs a{
+    position: relative;
+    font-size: 1.5rem;
+    color: var(--bg-greenblue);
+
+}
+header nav .tabs a .number{
+    position: absolute;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background: var(--color-red);
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    top: -25%;
+    right: -25%;
+}
+
+header nav .toogle-bar{
+    display: none;
+    color: var(--bg-greenblue);
+    font-size: 1.5rem;
+}
+header nav .closeToggleMenu{
+    display: none;
+}
+
+
+
+
+/* --------- Media Querry -----------  */
+
+@media only screen and (max-width: 960px){
+    header .header , header nav {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+    header nav .toogle-bar{
+        display: block;
+    }
+    header nav .links{
+        z-index: 5;
+        width: 250px;
+        position: fixed;
+        top: 0rem;
+        bottom: 0rem;
+        right: -250px;
+        transition: var(--transition-3);
+    }
+    header nav .links.active{
+        right: 0px;
+    }
+    header nav ul{
+       
+        flex-direction: column;
+        padding: 3rem 1rem;
+        background: var(--bg-light-green);
+        align-items: flex-start;
+        height: 100%;
+        position: relative;
+    }
+    header nav .closeToggleMenu{
+        display: block;
+        font-size: 1.8rem;
+        position: absolute;
+        right: 1.5rem;
+        top: 2%;
+        color: var(--bg-greenblue);
+    }
+}
+
+@media only screen and (max-width: 750px){
+    header .header , header nav {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    header{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    header .calls{
+        display: none;
+    }
+    header .search-bar {
+        flex-grow: 1;
+    }
+    header .top-head {
+        gap: 1rem;
+    }
+    
+}
+
+@media only screen and (max-width: 420px){
+    
+    header .top-head {
+        gap: 0rem;
+    }
+    header .header , header nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    header .book-btn a {
+        display: none;
+    }
+}
+
+
+
