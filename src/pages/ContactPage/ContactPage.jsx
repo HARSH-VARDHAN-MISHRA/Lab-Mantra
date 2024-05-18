@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Contact from '../../components/Contact/Contact'
 
 const ContactPage = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
     return (
         <>
             <section className="bread">

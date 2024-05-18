@@ -38,11 +38,11 @@ const Header = () => {
                 </div>
                 <div className={`links ${toogleMenu ? 'active' : ''}`}>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about-us">About Us</Link></li>
-                        <li><Link to="/book-your-test">Book Test</Link></li>
-                        <li><Link to="/">Download Report</Link></li>
-                        <li><Link to="/contact-us">Contact Us</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/">Home</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/about-us">About Us</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/book-your-test">Book Test</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/">Download Report</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/contact-us">Contact Us</Link></li>
                         <div className="closeToggleMenu" onClick={handleCloseMenu}>
                             <i class="fa-solid fa-xmark"></i>
                         </div>

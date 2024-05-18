@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const AllTest = () => {
@@ -106,6 +106,13 @@ const AllTest = () => {
             "discount_percentage": 20
         }
     ];
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
   return (
     <>
         <section className="bread">

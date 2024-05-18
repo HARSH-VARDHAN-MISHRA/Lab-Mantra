@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import b1 from './banner-1.jpg'
 import b2 from './banner-2.jpg'
@@ -13,8 +13,13 @@ import Contact from '../../components/Contact/Contact'
 import About from '../../components/About/About'
 
 
-
 const HomePage = () => {
+  useEffect(() => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+}, [])
   return (
     <>
       <section className="cara container-fluid p-0">
