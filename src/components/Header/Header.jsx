@@ -41,6 +41,7 @@ const Header = () => {
                         <li><Link onClick={handleCloseMenu} to="/">Home</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/about-us">About Us</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/book-your-test">Book Test</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/our-packages">Our Packages</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/">Download Report</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/contact-us">Contact Us</Link></li>
                         <div className="closeToggleMenu" onClick={handleCloseMenu}>

@@ -15,12 +15,12 @@ import Packages from '../../components/Packages/Packages'
 
 
 const HomePage = () => {
-  // useEffect(() => {
-  //   window.scrollTo({
-  //       top: 0,
-  //       behavior: "smooth"
-  //   })
-  // }, [])
+  useEffect(() => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+  }, [])
   return (
     <>
       <section className="cara container-fluid p-0">

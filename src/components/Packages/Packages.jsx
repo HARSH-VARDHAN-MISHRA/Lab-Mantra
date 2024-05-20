@@ -260,7 +260,7 @@ const Packages = () => {
 
     return (
         <>
-            <section className="packages">
+            <section className="packages my-5">
                 <div className="container">
                     <div className="grid-3">
                         {packageList && packageList.map((item, index) => (

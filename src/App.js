@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import AboutPage from './pages/AboutPage/AboutPage';
 import ContactPage from './pages/ContactPage/ContactPage';
 import AllTest from './pages/AllTest/AllTest';
+import PackagesPage from './pages/PackagesPage/PackagesPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/about-us' element={<AboutPage />} />
             <Route path='/contact-us' element={<ContactPage />} />
             <Route path='/book-your-test' element={<AllTest />} />
+            <Route path='/our-packages' element={<PackagesPage />} />
           </Routes>
         <Footer/>
       </BrowserRouter>
