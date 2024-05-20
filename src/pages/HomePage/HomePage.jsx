@@ -11,15 +11,16 @@ import './HomePage.css'
 import Tests from '../../components/Tests/Tests'
 import Contact from '../../components/Contact/Contact'
 import About from '../../components/About/About'
+import Packages from '../../components/Packages/Packages'
 
 
 const HomePage = () => {
-  useEffect(() => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    })
-}, [])
+  // useEffect(() => {
+  //   window.scrollTo({
+  //       top: 0,
+  //       behavior: "smooth"
+  //   })
+  // }, [])
   return (
     <>
       <section className="cara container-fluid p-0">
@@ -129,9 +130,20 @@ const HomePage = () => {
       <Head title="Our Services" />
       <OurServices/>
 
+      <Head title="Our Packages" />
+      <Packages/>
+
+      <Head title="Women Packages" />
+      <Packages/>
+
       <Head title="Lab Mantra Popular Tests" />
       <Tests/>
       
+      <section className="heading pb-0">
+            <div className="container">
+                <h2>Contact Us</h2>
+            </div>
+      </section>
       <Contact/>
       
     </>

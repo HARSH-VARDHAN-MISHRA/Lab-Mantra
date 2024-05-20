@@ -7,11 +7,11 @@ const Contact = () => {
             <section className="contact">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 text-center">
+                        {/* <div className="col-12 text-center">
                             <h4>Contact Us</h4>
                             <p>For any issues related to service or sample collection please reach us here.</p>
 
-                        </div>
+                        </div> */}
                         <div className="col-12">
                             <div class="row">
                                 <div class="col-md-6 mb-3">

@@ -1,6 +1,8 @@
 .heading{
     padding: 2rem 0rem;
     margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 .heading h2{
     text-transform: capitalize;
@@ -16,6 +18,7 @@
     }
     .heading h2{
         font-size: 2.2rem;
+        margin-bottom: 0rem;
     }
 }
 
