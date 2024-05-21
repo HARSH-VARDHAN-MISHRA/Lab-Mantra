@@ -68,7 +68,7 @@
 @media only screen and (max-width: 420px){
     .login .input-field {
         width: 95%;
-        gap: 0.4rem;
+        gap: 0.8rem;
     }
     .login button[type="submit"] {
         width: 80%;
