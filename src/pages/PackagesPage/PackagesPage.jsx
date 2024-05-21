@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Packages from '../../components/Packages/Packages'
 import { Link } from 'react-router-dom'
+import Head from '../../components/Head/Head'
 
 const PackagesPage = () => {
     useEffect(() => {
@@ -22,6 +23,14 @@ const PackagesPage = () => {
                 </nav>
             </div>
         </section>
+
+        <Head title="Latest Packages" />
+        <Packages/>
+
+        <Head title="Women Packages" />
+        <Packages/>
+
+        <Head title="Men Packages" />
         <Packages/>
     </>
   )

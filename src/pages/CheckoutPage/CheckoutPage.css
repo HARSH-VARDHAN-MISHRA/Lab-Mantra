@@ -1,0 +1,46 @@
+.checkout .mx-auto.green{
+    padding: 0.5rem;
+    background: var(--bg-light-greenblue);
+}
+
+
+.checkout .information tr th,
+.checkout .information tr td{
+    padding: 0.1rem ;
+    width: 50%;
+}
+.checkout .information tr th{
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.checkout .information tr td{
+    text-transform: uppercase;
+}
+.checkout .information tr td.email{
+    text-transform: inherit;
+}
+
+.pay-pro .form-control{
+    border-radius: 50rem;
+}
+.pay-pro .btn1{
+    min-width: 100%;
+    border-radius: 50rem;
+    display: block;
+    text-align: center;
+}
+@media only screen and (max-width: 600px){
+    .pay-pro .btn1{
+        margin-top: 1rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+

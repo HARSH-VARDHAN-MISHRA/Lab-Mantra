@@ -21,6 +21,7 @@ const HomePage = () => {
         behavior: "smooth"
     })
   }, [])
+  
   return (
     <>
       <section className="cara container-fluid p-0">

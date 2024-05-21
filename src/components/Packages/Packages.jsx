@@ -286,7 +286,7 @@ const Packages = () => {
                                 <div className="content">
                                     {/* <p> <i class="fa-solid fa-circle-check"></i> Free Home Collection</p> */}
                                     <div className="book-btn">
-                                        <Link to="">Book Now <i class="fa-solid fa-flask-vial"></i></Link>
+                                        <Link to="/cart">Book Now <i class="fa-solid fa-flask-vial"></i></Link>
                                     </div>
 
                                 </div>

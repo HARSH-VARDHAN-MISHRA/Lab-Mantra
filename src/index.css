@@ -117,7 +117,26 @@ img{
   opacity: 0.9;
 }
 
+.btn1{
+  background: var(--bg-dark-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: var(--transition-3);
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+.btn1 i{
+  transition: var(--transition-3);
 
+}
+.btn1:hover{
+  opacity: 0.9;
+}
+.btn1:hover i{
+  padding-left: 1rem;
+}
 
 @media only screen and (max-width: 900px){
   .grid-3{

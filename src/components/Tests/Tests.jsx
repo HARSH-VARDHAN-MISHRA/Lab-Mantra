@@ -129,7 +129,7 @@ const Tests = () => {
                                         <span className="discount_price">₹{item.discount_price}</span>
                                         <span className="actual_price">₹{item.actual_price}</span>
                                     </div>
-                                    <Link className="bookBtn">
+                                    <Link to="/cart" className="bookBtn">
                                         BOOK
                                     </Link>
                                 </div>
