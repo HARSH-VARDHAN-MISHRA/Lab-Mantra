@@ -192,7 +192,9 @@ header nav .closeToggleMenu{
     header .top-head {
         gap: 1rem;
     }
-    
+    header .book-btn a {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 420px){
