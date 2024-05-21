@@ -42,7 +42,7 @@ const Header = () => {
                         <li><Link onClick={handleCloseMenu} to="/about-us">About Us</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/book-your-test">Book Test</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/our-packages">Our Packages</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/">Download Report</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/report-status">Check Report</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/contact-us">Contact Us</Link></li>
                         <div className="closeToggleMenu" onClick={handleCloseMenu}>
                             <i class="fa-solid fa-xmark"></i>
@@ -50,10 +50,10 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="tabs">
-                    <Link className='profile'>
+                    <Link to="/sign-up" className='profile'>
                         <i class="fa-solid fa-circle-user"></i>
                     </Link>
-                    <Link className='cart'>
+                    <Link to="/cart" className='cart'>
                         <i class="fa-solid fa-cart-plus"></i>
                         <div className="number">1</div>
                     </Link>

@@ -12,6 +12,7 @@ import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Login from './components/Login/Login';
 import SignIn from './components/Login/SignIn';
 import ForgetPassword from './components/Login/ForgetPassword';
+import UserReport from './pages/UserReport/UserReport';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='/our-packages' element={<PackagesPage />} />
             <Route path='/cart' element={<Booking />} />
             <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
+            <Route path='/report-status' element={<UserReport />} />
 
             {/* ------- Authentication ---------  */}
             <Route path='/login' element={<Login />} />

@@ -95,7 +95,7 @@ const Booking = () => {
                                 </div>
 
                                 <div className="col-12 text-center moreTest">
-                                    <Link to="" >Book More Tests  <i class="fa-solid fa-reply"></i> </Link>
+                                    <Link to="/our-packages" >Book More Tests  <i class="fa-solid fa-reply"></i> </Link>
                                 </div>
 
                                 <div className="col-12 tab-pills ">
