@@ -13,6 +13,7 @@ import Login from './components/Login/Login';
 import SignIn from './components/Login/SignIn';
 import ForgetPassword from './components/Login/ForgetPassword';
 import UserReport from './pages/UserReport/UserReport';
+import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/sign-up' element={<SignIn />} />
             <Route path='/login/forget-password' element={<ForgetPassword />} />
+
+            <Route path='/user-profile' element={<UserProfilePage />} />
 
           </Routes>
         <Footer/>

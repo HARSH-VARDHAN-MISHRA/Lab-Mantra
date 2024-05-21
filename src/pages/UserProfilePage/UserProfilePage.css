@@ -1,0 +1,26 @@
+
+
+.profile-page .profile-img img{
+    height: 15rem;
+    width: 15rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 1px solid var(--bg-light-greenblue);
+    padding: 1px;
+    overflow: hidden;
+}
+
+.profile-page .nav-tabs{
+    margin-bottom: 2rem;    
+}
+.profile-page .tab-content {
+    min-width: 100%;
+}
+.profile-page .pro-tab th{
+    background: var(--bg-light-greenblue);
+    font-weight: 500;
+    border-right: 1px solid white;
+    width: 40%;
+}
+
