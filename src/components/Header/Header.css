@@ -35,16 +35,18 @@ header .search-bar{
     background-color: white;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 1rem;
     width: 50%;
 }
 header .search-bar input{
     border: none;
     outline: none;
+    width: 95%;
 }
 header .search-bar i{
     cursor: pointer;
+    width: 5%;
     color: var(--bg-greenblue);
 }
 
