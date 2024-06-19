@@ -38,9 +38,9 @@ const Booking = () => {
                 <div className="container">
                 <nav aria-label="breadcrumb ">
                     <h2>Cart</h2>
-                    <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                    <ol className="breadcrumb">
+                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Cart</li>
                     </ol>
                 </nav>
                 </div>
@@ -74,7 +74,7 @@ const Booking = () => {
                                                 <td>&#8377; 7920</td>
                                                 <td>10%</td>
                                                 <td>&#8377; 1599</td>
-                                                <td><div className="delete"><i class="fa-solid fa-trash-arrow-up"></i></div></td>
+                                                <td><div className="delete"><i className="fa-solid fa-trash-arrow-up"></i></div></td>
                                             </tr>
                                             <tr>
                                                 <td>Home Collection Charges</td>
@@ -95,7 +95,7 @@ const Booking = () => {
                                 </div>
 
                                 <div className="col-12 text-center moreTest">
-                                    <Link to="/our-packages" >Book More Tests  <i class="fa-solid fa-reply"></i> </Link>
+                                    <Link to="/our-packages" >Book More Tests  <i className="fa-solid fa-reply"></i> </Link>
                                 </div>
 
                                 <div className="col-12 tab-pills ">
@@ -127,22 +127,22 @@ const Booking = () => {
 
                                             <div id="home" className={`tab-pane fade ${activeTab === 'home' ? 'show active' : ''}`}>
 
-                                                <form class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="name" class="form-label">Name</label>
-                                                        <input type="text" class="form-control" id="name" name="name" required />
+                                                <form className="row g-3">
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="name" className="form-label">Name</label>
+                                                        <input type="text" className="form-control" id="name" name="name" required />
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="mobile" class="form-label">Mobile No</label>
-                                                        <input type="tel" class="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="mobile" className="form-label">Mobile No</label>
+                                                        <input type="tel" className="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" required />
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="email" class="form-label">Email ID</label>
-                                                        <input type="email" class="form-control" id="email" name="email" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="email" className="form-label">Email ID</label>
+                                                        <input type="email" className="form-control" id="email" name="email" required />
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="age" class="form-label">Age</label>
-                                                        <input type="number" class="form-control" id="age" name="age" min="0" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="age" className="form-label">Age</label>
+                                                        <input type="number" className="form-control" id="age" name="age" min="0" required />
                                                     </div>
                                                     <div className="col-md-6">
                                                         <label htmlFor="gender" className="form-label">Gender</label>
@@ -152,9 +152,9 @@ const Booking = () => {
                                                             <option value="Female">Female</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="date" class="form-label">Date</label>
-                                                        <input type="date" class="form-control" id="date" name="date" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="date" className="form-label">Date</label>
+                                                        <input type="date" className="form-control" id="date" name="date" required />
                                                     </div>
                                                     <div className="col-md-6">
                                                         <label htmlFor="Time" className="form-label">Time</label>
@@ -165,35 +165,35 @@ const Booking = () => {
                                                             ))}
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="prescription" class="form-label">Upload Prescription <span>(If available)</span></label>
-                                                        <input type="file" class="form-control" id="prescription" name="prescription" />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="prescription" className="form-label">Upload Prescription <span>(If available)</span></label>
+                                                        <input type="file" className="form-control" id="prescription" name="prescription" />
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <label htmlFor="address" class="form-label">Address</label>
-                                                        <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                                                    <div className="col-md-12">
+                                                        <label htmlFor="address" className="form-label">Address</label>
+                                                        <textarea className="form-control" id="address" name="address" rows="3" required></textarea>
                                                     </div>
-                                                    <div class="col-md-12 mt-5 text-center">
-                                                        {/* <button type="submit" className="btn1">Continue <i class="fa-solid fa-arrow-right"></i></button> */}
-                                                        <Link to="/proceed-to-checkout" className="btn1">Proceed To Checkout <i class="fa-solid fa-arrow-right"></i></Link>
+                                                    <div className="col-md-12 mt-5 text-center">
+                                                        {/* <button type="submit" className="btn1">Continue <i className="fa-solid fa-arrow-right"></i></button> */}
+                                                        <Link to="/proceed-to-checkout" className="btn1">Proceed To Checkout <i className="fa-solid fa-arrow-right"></i></Link>
                                                     </div>
                                                 </form>
 
                                             </div>
 
                                             <div id="lab" className={`tab-pane fade ${activeTab === 'menu1' ? 'show active' : ''}`}>
-                                                <form class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="name" class="form-label">Name</label>
-                                                        <input type="text" class="form-control" id="name" name="name" required />
+                                                <form className="row g-3">
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="name" className="form-label">Name</label>
+                                                        <input type="text" className="form-control" id="name" name="name" required />
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="mobile" class="form-label">Mobile No</label>
-                                                        <input type="tel" class="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="mobile" className="form-label">Mobile No</label>
+                                                        <input type="tel" className="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" required />
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="email" class="form-label">Email ID</label>
-                                                        <input type="email" class="form-control" id="email" name="email" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="email" className="form-label">Email ID</label>
+                                                        <input type="email" className="form-control" id="email" name="email" required />
                                                     </div>
                                                     <div className="col-md-6">
                                                         <label htmlFor="gender" className="form-label">Gender</label>
@@ -203,12 +203,12 @@ const Booking = () => {
                                                             <option value="Female">Female</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label htmlFor="age" class="form-label">Age</label>
-                                                        <input type="number" class="form-control" id="age" name="age" min="0" required />
+                                                    <div className="col-md-6">
+                                                        <label htmlFor="age" className="form-label">Age</label>
+                                                        <input type="number" className="form-control" id="age" name="age" min="0" required />
                                                     </div>
-                                                    <div class="col-md-12 text-center">
-                                                        <Link to="/proceed-to-checkout"  className="btn1">Proceed To Checkout <i class="fa-solid fa-arrow-right"></i></Link>
+                                                    <div className="col-md-12 text-center">
+                                                        <Link to="/proceed-to-checkout"  className="btn1">Proceed To Checkout <i className="fa-solid fa-arrow-right"></i></Link>
                                                     </div>
                                                 </form>
 
@@ -222,6 +222,8 @@ const Booking = () => {
                     </div>
                 </div>
             </section>
+
+            
         </>
     )
 }

@@ -80,14 +80,14 @@ const CheckoutPage = () => {
                                                 <td>&#8377; 7920</td>
                                                 <td>10%</td>
                                                 <td>&#8377; 1599</td>
-                                                <td><div className="delete"><i class="fa-solid fa-trash-arrow-up"></i></div></td>
+                                                <td><div className="delete"><i className="fa-solid fa-trash-arrow-up"></i></div></td>
                                             </tr>
                                             <tr>
                                                 <td>Redcliffe Fit India Full Body</td>
                                                 <td>&#8377; 7920</td>
                                                 <td>10%</td>
                                                 <td>&#8377; 1599</td>
-                                                <td><div className="delete"><i class="fa-solid fa-trash-arrow-up"></i></div></td>
+                                                <td><div className="delete"><i className="fa-solid fa-trash-arrow-up"></i></div></td>
                                             </tr>
                                             <tr>
                                                 <td>Home Collection Charges</td>
@@ -119,7 +119,7 @@ const CheckoutPage = () => {
                                             </select>
                                         </div>
                                         <div className="col-md-6 ">
-                                            <Link to="" className='btn1'>Checkout To Proceed <i class="fa-solid fa-arrow-right"></i></Link>
+                                            <Link to="" className='btn1'>Checkout To Proceed <i className="fa-solid fa-arrow-right"></i></Link>
                                         </div>
 
                                     </div>

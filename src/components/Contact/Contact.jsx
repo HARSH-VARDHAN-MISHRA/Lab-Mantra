@@ -13,30 +13,30 @@ const Contact = () => {
 
                         </div> */}
                         <div className="col-12">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    {/* <label for="form1" class="form-label">First Name</label> */}
-                                    <input type="text" class="form-control" required id="form1" placeholder="First Name" />
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    {/* <label for="form1" className="form-label">First Name</label> */}
+                                    <input type="text" className="form-control" required id="form1" placeholder="First Name" />
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    {/* <label for="form2" class="form-label">Last Name</label> */}
-                                    <input type="text" class="form-control" required id="form2" placeholder="Last Name" />
+                                <div className="col-md-6 mb-3">
+                                    {/* <label for="form2" className="form-label">Last Name</label> */}
+                                    <input type="text" className="form-control" required id="form2" placeholder="Last Name" />
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    {/* <label for="form3" class="form-label">Phone Number</label> */}
-                                    <input type="number" class="form-control" required id="form3" placeholder="Phone Number" />
+                                <div className="col-md-6 mb-3">
+                                    {/* <label for="form3" className="form-label">Phone Number</label> */}
+                                    <input type="number" className="form-control" required id="form3" placeholder="Phone Number" />
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    {/* <label for="form4" class="form-label">Email Id</label> */}
-                                    <input type="email" class="form-control" required id="form4" placeholder="Email Id" />
+                                <div className="col-md-6 mb-3">
+                                    {/* <label for="form4" className="form-label">Email Id</label> */}
+                                    <input type="email" className="form-control" required id="form4" placeholder="Email Id" />
                                 </div>
-                                <div class="col-12 mb-3">
-                                    {/* <label for="exampleFormControlTextarea1" class="form-label">Address</label> */}
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Address"></textarea>
+                                <div className="col-12 mb-3">
+                                    {/* <label for="exampleFormControlTextarea1" className="form-label">Address</label> */}
+                                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Address"></textarea>
                                 </div>
 
                                 <div className="col-12 text-center">
-                                    <button type="submit" class="form-control">Send Message</button>
+                                    <button type="submit" className="form-control">Send Message</button>
                                 </div>
 
                             </div>

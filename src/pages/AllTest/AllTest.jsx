@@ -119,9 +119,9 @@ const AllTest = () => {
             <div className="container">
                 <nav aria-label="breadcrumb ">
                     <h2>Book Your Test</h2>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-                        <li class="breadcrumb-item active" aria-current="page">Book Your Test</li>
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">Book Your Test</li>
                     </ol>
                 </nav>
             </div>

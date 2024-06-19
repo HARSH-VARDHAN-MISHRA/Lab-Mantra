@@ -58,16 +58,102 @@
 
 
 
+/* -------- Banner  Location --------  */
+.locate{
+    /* background: var(--bg-light-green); */
+    background-image: linear-gradient(to left bottom, #b5e7e6, #99dcda, #7cd2cf, #5bc7c2, #2dbcb6);
+    padding: 5rem 0rem;
+}
+.locate .flex-loc{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.locate .flex-content{
+    width: 50%;
+}
+.locate h1{
+    font-weight: 600;
+    color: var(--color-light-weight);
+    font-size: 3rem;
+}
+.locate h1 span{
+    color: var(--color-blue);
+}
+.locate .flex-content form{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background: var(--color-blue-light);
+    border-radius: 10px;
 
-
-
-
-
-
-
-
-
-
+}
+.locate .flex-content form .input-fd{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 0.8rem 0.5rem;
+    background: white;
+    border-radius: 50rem;
+}
+.locate .flex-content form .input-fd i{
+    font-size: 1.2rem;
+    width: 10%;
+    text-align: center;
+}
+.locate .flex-content form .input-fd input{
+    width: 90%;
+    border: none;
+    outline: none;
+}
+.locate .flex-content form button[type="submit"]{
+    border: none;
+    outline: none;
+    padding: 0.6rem 0.5rem;
+    width: 80%;
+    margin: auto;
+    border-radius: 50rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: var(--color-blue);
+    color: white;
+    box-shadow: 3px -1px 8px #25b2ee;
+    transition: var(--transition-3);
+}
+.locate .flex-content form button[type="submit"]{
+    opacity: 0.7;
+}
+@media only screen and (max-width: 780px) {
+    .locate .flex-content{
+        width: 100%;
+    }
+    .locate .flex-loc {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+    .locate {
+        padding: 3rem 0rem;
+    }
+    .locate h1 {
+        font-weight: 500;
+        font-size: 2.5rem;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 490px){
+    .locate .flex-content form {
+        width: 95%;
+    }
+    .locate h1 {
+        font-weight: 500;
+        font-size: 2rem;
+        text-align: center;
+    }
+}
 
 
 

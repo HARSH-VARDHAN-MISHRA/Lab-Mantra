@@ -26,11 +26,11 @@ const Login = () => {
                         <div className="form">
                             <form>
                                 <div className="input-field">
-                                    <i class="fa-solid fa-envelope"></i>
+                                    <i className="fa-solid fa-envelope"></i>
                                     <input type="email" autoFocus placeholder="Enter Email" required />
                                 </div>
                                 <div className="input-field">
-                                    <i class="fa-solid fa-lock"></i>
+                                    <i className="fa-solid fa-lock"></i>
                                     <input type="password" placeholder="Enter Password" required />
                                 </div>
 

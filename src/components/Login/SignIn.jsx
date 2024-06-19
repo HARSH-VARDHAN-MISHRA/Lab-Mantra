@@ -24,19 +24,19 @@ const SignIn = () => {
                         <div className="form">
                             <form>
                                 <div className="input-field">
-                                    <i class="fa-solid fa-user-lock"></i>
+                                    <i className="fa-solid fa-user-lock"></i>
                                     <input type="text" autoFocus placeholder="Enter Name" required />
                                 </div>
                                 <div className="input-field">
-                                    <i class="fa-solid fa-envelope"></i>
+                                    <i className="fa-solid fa-envelope"></i>
                                     <input type="email" placeholder="Enter Email" required />
                                 </div>
                                 <div className="input-field">
-                                    <i class="fa-solid fa-phone-volume"></i>
+                                    <i className="fa-solid fa-phone-volume"></i>
                                     <input type="tel" placeholder="Enter Mobile Number" required />
                                 </div>
                                 <div className="input-field">
-                                    <i class="fa-solid fa-lock"></i>
+                                    <i className="fa-solid fa-lock"></i>
                                     <input type="password" placeholder="Enter Password" required />
                                 </div>
 

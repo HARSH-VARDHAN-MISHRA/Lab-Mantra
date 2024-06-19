@@ -24,34 +24,61 @@ const HomePage = () => {
   
   return (
     <>
-      <section className="cara container-fluid p-0">
+      {/* <section className="cara container-fluid p-0">
         <div className="row">
           <div className="col-12">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src={b1} class="d-block w-100" alt="..." />
+            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img src={b1} className="d-block w-100" alt="..." />
                 </div>
-                <div class="carousel-item">
-                  <img src={b2} class="d-block w-100" alt="..." />
+                <div className="carousel-item">
+                  <img src={b2} className="d-block w-100" alt="..." />
                 </div>
-                <div class="carousel-item">
-                  <img src={b3} class="d-block w-100" alt="..." />
+                <div className="carousel-item">
+                  <img src={b3} className="d-block w-100" alt="..." />
                 </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
               </button>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
+      <section className="locate">
+        <div className="container">
+          <div className="flex-loc">
+
+            <div className='flex-content'>
+              <h1>Find Top-Quality Labs <br /> Near You at <br /> <span>Affordable Prices!</span></h1>
+            </div>
+
+            <div className="flex-content">
+              <form >
+                <div className="input-fd">
+                  <i class="fa-solid fa-location-crosshairs"></i>
+                  <input type="text" placeholder="Enter City" />
+                </div>
+                <div className="input-fd">
+                  <i class="fa-brands fa-searchengin"></i>
+                  <input type="text" placeholder="Add Multiple Test to find labs" />
+                </div>
+
+                <button type="submit">Find Nearest Location</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      
       <section className="all-sec">
         <div className="container">
           <div className="grid-2">
@@ -81,7 +108,7 @@ const HomePage = () => {
                   <p>Home Sample Collection</p>
                 </div>
                 <div className="arrow">
-                  <i class="fa-solid fa-circle-chevron-right"></i>
+                  <i className="fa-solid fa-circle-chevron-right"></i>
                 </div>
               </Link>
             </div>
@@ -117,7 +144,7 @@ const HomePage = () => {
                   <p>Check E-Reports Status</p>
                 </div>
                 <div className="arrow">
-                  <i class="fa-solid fa-circle-chevron-right"></i>
+                  <i className="fa-solid fa-circle-chevron-right"></i>
                 </div>
               </Link>
             </div>
