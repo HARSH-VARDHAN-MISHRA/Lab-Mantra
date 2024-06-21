@@ -1,161 +1,211 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const AllTest = () => {
-    const allTests = [
-        {
-            "service_name": "ANTI-AQUAPORIN-4 (NMO-IGG) ANTIBODIES",
-            "actual_price": 6200,
-            "discount_price": 4960,
-            "discount_percentage": 20
-        },
-        {
-            "service_name": "MENOPAUSAL DIAGNOSTIC PANEL",
-            "actual_price": 2760,
-            "discount_price": 2484,
-            "discount_percentage": 10
-        },
-        {
-            "service_name": "ABS TO EXTRACTABLE NUCLEAR AG: SS-A & SS-B",
-            "actual_price": 6770,
-            "discount_price": 6770,
-            "discount_percentage": 0
-        },
-        {
-            "service_name": "MENOPAUSAL MONITORING PANEL",
-            "actual_price": 2760,
-            "discount_price": 2208,
-            "discount_percentage": 20
-        },
-        {
-            "service_name": "HIRSUTISM SCREENING PANEL",
-            "actual_price": 4820,
-            "discount_price": 4338,
-            "discount_percentage": 10
-        },
-        {
-            "service_name": "HIRSUTISM EVALUATION PANEL",
-            "actual_price": 7580,
-            "discount_price": 7580,
-            "discount_percentage": 0
-        },
-        {
-            "service_name": "PCOD PANEL",
-            "actual_price": 5850,
-            "discount_price": 4680,
-            "discount_percentage": 20
-        },
-        {
-            "service_name": "INHIBIN B, LH, FSH & PROLACTIN",
-            "actual_price": 4270,
-            "discount_price": 3843,
-            "discount_percentage": 10
-        },
-        {
-            "service_name": "BOH PANEL",
-            "actual_price": 7430,
-            "discount_price": 5944,
-            "discount_percentage": 20
-        },
-        {
-            "service_name": "THYROID ANTIBODIES, SERUM",
-            "actual_price": 3440,
-            "discount_price": 2924,
-            "discount_percentage": 15
-        },
-        {
-            "service_name": "OSTEOSCREEN PANEL - I",
-            "actual_price": 4820,
-            "discount_price": 4820,
-            "discount_percentage": 0
-        },
-        {
-            "service_name": "OSTEOSCREEN PANEL II",
-            "actual_price": 7580,
-            "discount_price": 7580,
-            "discount_percentage": 0
-        },
-        {
-            "service_name": "IBD SCREENING PANEL",
-            "actual_price": 5520,
-            "discount_price": 4968,
-            "discount_percentage": 10
-        },
-        {
-            "service_name": "LIVER AND KIDNEY PROFILE",
-            "actual_price": 3000,
-            "discount_price": 2550,
-            "discount_percentage": 15
-        },
-        {
-            "service_name": "CHRONIC FATIGUE SYNDROME PANEL",
-            "actual_price": 7840,
-            "discount_price": 6272,
-            "discount_percentage": 20
-        },
-        {
-            "service_name": "IMMUNOGLOBULIN, SERUM",
-            "actual_price": 2840,
-            "discount_price": 2840,
-            "discount_percentage": 0
-        },
-        {
-            "service_name": "ACUTE MYELOID LEUKEMIA PANEL",
-            "actual_price": 14450,
-            "discount_price": 11560,
-            "discount_percentage": 20
+    const [tests, setTests] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(12);
+    const [totalItems, setTotalItems] = useState(0);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const fetchTests = async (page) => {
+        try {
+            const res = await axios.get(`http://localhost:6842/api/v1/get-all-test?page=${page}&limit=${itemsPerPage}`);
+            setTests(res.data.data);
+            setTotalItems(res.data.data.length || 0);
+        } catch (error) {
+            console.error("Something went wrong while fetching tests: ", error);
         }
-    ];
+    }
+
+    const handleNextPage = () => {
+        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    }
+
+    const handlePreviousPage = () => {
+        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+    }
+
+    const handlePageClick = (page) => {
+        setCurrentPage(page);
+    }
+
+    const startItem = (currentPage - 1) * itemsPerPage + 1;
+    const endItem = Math.min(startItem + itemsPerPage - 1, totalItems);
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
-        })
-    }, [])
-  return (
-    <>
-        <section className="bread">
-            <div className="container">
-                <nav aria-label="breadcrumb ">
-                    <h2>Book Your Test</h2>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                        <li className="breadcrumb-item active" aria-current="page">Book Your Test</li>
-                    </ol>
-                </nav>
-            </div>
-        </section>
+        });
+        fetchTests(currentPage);
+    }, [currentPage])
 
-        <section className="tests my-5">
-            <div className="container">
-                <div className="grid-3">
-                    {allTests && allTests.map((item, index) => (
-                        <div className="single-test" key={index}>
-                            <h4>{item.service_name}</h4>
-                            <div className="flex">
-                                <div className="price">
-                                    <span className="discount_price">₹{item.discount_price}</span>
-                                    <span className="actual_price">₹{item.actual_price}</span>
+    // Filter tests based on search term
+    const filteredTests = tests.filter(item =>
+        item.testName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Slice the filtered tests array to display only the tests for the current page
+    const displayedTests = filteredTests.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+    // Function to generate the pagination buttons
+    const generatePagination = () => {
+        const pageButtons = [];
+        const maxVisiblePages = 5; // Maximum number of visible pages in the pagination
+
+        if (totalPages <= maxVisiblePages) {
+            // If total pages are less than or equal to maxVisiblePages, show all pages
+            for (let i = 1; i <= totalPages; i++) {
+                pageButtons.push(
+                    <button
+                        key={i}
+                        onClick={() => handlePageClick(i)}
+                        className={i === currentPage ? 'active' : ''}
+                    >
+                        {i}
+                    </button>
+                );
+            }
+        } else {
+            // Calculate the start and end of the pagination range
+            let startPage = Math.max(currentPage - Math.floor(maxVisiblePages / 2), 1);
+            let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
+            // Adjust startPage and endPage if nearing the edges
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+            }
+
+            // Add ellipsis and first/last page buttons if necessary
+            if (startPage > 1) {
+                pageButtons.push(
+                    <button key={1} onClick={() => handlePageClick(1)}>
+                        1
+                    </button>
+                );
+                if (startPage > 2) {
+                    pageButtons.push(<span key="ellipsis1">...</span>);
+                }
+            }
+
+            // Add the visible page buttons
+            for (let i = startPage; i <= endPage; i++) {
+                pageButtons.push(
+                    <button
+                        key={i}
+                        onClick={() => handlePageClick(i)}
+                        className={i === currentPage ? 'active' : ''}
+                    >
+                        {i}
+                    </button>
+                );
+            }
+
+            // Add ellipsis and last page button if necessary
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    pageButtons.push(<span key="ellipsis2">...</span>);
+                }
+                pageButtons.push(
+                    <button key={totalPages} onClick={() => handlePageClick(totalPages)}>
+                        {totalPages}
+                    </button>
+                );
+            }
+        }
+
+        return pageButtons;
+    };
+
+    // Function to handle search input change
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    }
+
+    return (
+        <>
+            <section className="bread">
+                <div className="container">
+                    <nav aria-label="breadcrumb ">
+                        <h2>Lab Tests</h2>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Lab Tests</li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+
+            <section className="tests my-5">
+                <div className="container">
+                    <div className="row">
+
+                        <div className="col-md-12">
+                            <div className="side-head flex">
+                                <div className="sideHead-cont">
+                                    <h3 className='h3 head'>Lab Tests</h3>
+                                    <p>{`Showing ${startItem} - ${endItem} of ${totalItems}`}</p>
                                 </div>
-                                <Link className="bookBtn">
-                                    BOOK
-                                </Link>
+                                <div className="sideHead-cont">
+                                    <input
+                                        className='search-input'
+                                        type="text"
+                                        placeholder='Search Your Test'
+                                        value={searchTerm}
+                                        onChange={handleSearchChange}
+                                    />
+                                </div>
                             </div>
 
-                            {item.discount_percentage ? (
-                                <div className="abso">
-                                    <span>{item.discount_percentage}% Off</span>
-                                </div>
-                            ) : null}
+                            <div className="grid-3">
+                                {displayedTests.map((item, index) => (
+                                    <div className="single-test" key={index}>
+                                        <h4>{item.testName}</h4>
+                                        <div className="flex">
+                                            <div className="price">
+                                                {item.discountPrice ? (
+                                                    <>
+                                                        <span className="discount_price">₹{item.discountPrice}</span>
+                                                        <span className="actual_price">₹{item.actualPrice}</span>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span className="discount_price">₹{item.actualPrice}</span>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <Link to="/cart" className="bookBtn">
+                                                BOOK
+                                            </Link>
+                                        </div>
+                                        {item.discountPercentage ? (
+                                            <div className="abso">
+                                                <span>{item.discountPercentage}% Off</span>
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                ))}
+                            </div>
 
+                            <div className="pagination-controls">
+                                <button className='next-prev' onClick={handlePreviousPage} disabled={currentPage === 1}>
+                                    Previous
+                                </button>
+                                {generatePagination()}
+                                <button className='next-prev' onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                    Next
+                                </button>
+                            </div>
                         </div>
-                    ))}
+
+                    </div>
                 </div>
-            </div>
-        </section>
-    </>
-  )
+            </section>
+        </>
+    )
 }
 
-export default AllTest
+export default AllTest;

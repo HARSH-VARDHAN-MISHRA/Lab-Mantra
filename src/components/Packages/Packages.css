@@ -21,6 +21,7 @@
     color: var(--bg-dark-blue);
     max-width: 95%;
     margin: auto;
+    text-transform: capitalize;
 }
 .single-package .flex{
     margin: 0.2rem 0rem;

@@ -72,6 +72,13 @@ img{
 }
 
 
+/* ------- my-container -----  */
+/* .my-container{
+
+} */
+
+
+
 /* ------ BreadCrumb -----  */
 .bread{
   padding: 2rem 0rem;
@@ -114,6 +121,8 @@ img{
   padding: 0.5rem 0.8rem;
   border-radius: 5px;
   transform: var(--transition-3);
+  outline: none;
+  border: none;
 }
 .view-all-btn .butn:hover{
   opacity: 0.9;
@@ -279,3 +288,44 @@ img{
       opacity: 1;
   }
 }
+
+
+
+/* --------- side-head  ----  */
+.side-head{
+  border-bottom: 1px solid var(--bg-greenblue);
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.side-head .head{
+  color: var(--bg-dark-blue);
+}
+
+.side-head .search-input{
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--bg-greenblue);
+  outline: 1px solid var(--bg-greenblue);
+}
+.side-head .search-input::placeholder{
+  color: var(--bg-greenblue);
+}
+
+@media only screen and (max-width: 420px){
+  .side-head .sideHead-cont{
+    width: 100%;
+  }
+
+  .side-head .search-input{
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+

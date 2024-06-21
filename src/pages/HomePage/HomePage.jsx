@@ -145,6 +145,12 @@ const HomePage = () => {
       <Head title="Our Services" />
       <OurServices />
 
+
+
+      {/* --- All Type Of Packages --- */}
+      <Packages/>
+
+      {/* ---- Tests ---  */}
       <Head title="Lab Mantra Popular Tests" />
 
       <section className="tests">
@@ -186,7 +192,7 @@ const HomePage = () => {
 
           {tests.length > visibleTests && (
             <div className="view-more-container">
-              <Link to="/tests" className="viewMoreBtn">
+              <Link to="/lab-tests" className="viewMoreBtn">
                 View More
               </Link>
             </div>
@@ -194,10 +200,6 @@ const HomePage = () => {
 
         </div>
       </section>
-
-      {/* <Head title="Our Packages" />
-      <Packages/> */}
-
 
       <section className="heading pb-0">
         <div className="container">

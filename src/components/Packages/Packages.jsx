@@ -1,303 +1,141 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './Packages.css'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Packages.css';
+import axios from 'axios';
+import Head from '../Head/Head';
+import Loading from '../Loading/Loading'; // Import the Loading component
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
 const Packages = () => {
-    const packageList = [
-        {
-            "packageName": "Fit India Full Body Checkup With Vitamin Screening with Free HsCRP",
-            "testQuantity": 95,
-            "currentPrice": 1599,
-            "actualPrice": 7920,
-            "testCategories": [
-                {
-                    "testName": "CBC",
-                    "testNumber": 26
-                },
-                {
-                    "testName": "Kidney",
-                    "testNumber": 11
-                },
-                {
-                    "testName": "Hs-CRP",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Liver",
-                    "testNumber": 12
-                },
-                {
-                    "testName": "Vitamin B12",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "ESR",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Urine Analysis",
-                    "testNumber": 23
-                },
-                {
-                    "testName": "Lipid",
-                    "testNumber": 9
-                },
-                {
-                    "testName": "Vitamin D",
-                    "testNumber": 1
-                }
-            ]
-        },
-        {
-            "packageName": "Smart Plus Full Body Checkup with Vitamin Screening",
-            "testQuantity": 91,
-            "currentPrice": 1599,
-            "actualPrice": 7320,
-            "testCategories": [
-                {
-                    "testName": "CBC",
-                    "testNumber": 26
-                },
-                {
-                    "testName": "Kidney",
-                    "testNumber": 11
-                },
-                {
-                    "testName": "Liver",
-                    "testNumber": 12
-                },
-                {
-                    "testName": "Lipid",
-                    "testNumber": 9
-                },
-                {
-                    "testName": "Vitamin D",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "ESR",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Urine Analysis",
-                    "testNumber": 23
-                },
-                {
-                    "testName": "Thyroid",
-                    "testNumber": 3
-                },
-                {
-                    "testName": "Vitamin B12",
-                    "testNumber": 1
-                }
-            ]
-        },
-        {
-            "packageName": "Comprehensive Health Checkup with Free Vitamin B12 & D",
-            "testQuantity": 85,
-            "currentPrice": 1399,
-            "actualPrice": 6999,
-            "testCategories": [
-                {
-                    "testName": "CBC",
-                    "testNumber": 26
-                },
-                {
-                    "testName": "Liver",
-                    "testNumber": 12
-                },
-                {
-                    "testName": "Kidney",
-                    "testNumber": 11
-                },
-                {
-                    "testName": "Urine Analysis",
-                    "testNumber": 23
-                },
-                {
-                    "testName": "Lipid",
-                    "testNumber": 9
-                },
-                {
-                    "testName": "Vitamin B12",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Vitamin D",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "ESR",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Thyroid",
-                    "testNumber": 1
-                }
-            ]
-        },
-        {
-            "packageName": "Advanced Full Body Checkup with Free Iron Profile",
-            "testQuantity": 102,
-            "currentPrice": 1799,
-            "actualPrice": 8499,
-            "testCategories": [
-                {
-                    "testName": "CBC",
-                    "testNumber": 26
-                },
-                {
-                    "testName": "Liver",
-                    "testNumber": 12
-                },
-                {
-                    "testName": "Kidney",
-                    "testNumber": 11
-                },
-                {
-                    "testName": "Urine Analysis",
-                    "testNumber": 23
-                },
-                {
-                    "testName": "Lipid",
-                    "testNumber": 9
-                },
-                {
-                    "testName": "Vitamin D",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Iron Profile",
-                    "testNumber": 5
-                },
-                {
-                    "testName": "Thyroid",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "ESR",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Vitamin B12",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Diabetes",
-                    "testNumber": 12
-                }
-            ]
-        },
-        {
-            "packageName": "Premium Full Body Checkup with Vitamin Profile",
-            "testQuantity": 110,
-            "currentPrice": 1999,
-            "actualPrice": 8999,
-            "testCategories": [
-                {
-                    "testName": "CBC",
-                    "testNumber": 26
-                },
-                {
-                    "testName": "Kidney",
-                    "testNumber": 11
-                },
-                {
-                    "testName": "Liver",
-                    "testNumber": 12
-                },
-                {
-                    "testName": "Lipid",
-                    "testNumber": 9
-                },
-                {
-                    "testName": "Vitamin D",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Vitamin B12",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "ESR",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Urine Analysis",
-                    "testNumber": 23
-                },
-                {
-                    "testName": "Thyroid",
-                    "testNumber": 3
-                },
-                {
-                    "testName": "Diabetes",
-                    "testNumber": 12
-                },
-                {
-                    "testName": "Iron Profile",
-                    "testNumber": 5
-                },
-                {
-                    "testName": "Calcium",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Magnesium",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Phosphorus",
-                    "testNumber": 1
-                },
-                {
-                    "testName": "Electrolytes",
-                    "testNumber": 3
-                }
-            ]
+    const [packageTitles, setPackageTitles] = useState([]);
+    const [loadingTitles, setLoadingTitles] = useState(true);
+    const [packages, setPackages] = useState([]);
+    const [loadingPackages, setLoadingPackages] = useState(true);
+    const [testCategories, setTestCategories] = useState([]);
+    const [loadingTestCategories, setLoadingTestCategories] = useState(true);
+    const navigate = useNavigate(); // Initialize useNavigate hook
+
+    const fetchPackageTitle = async () => {
+        try {
+            const response = await axios.get('http://localhost:6842/api/v1/get-all-package-title');
+            setPackageTitles(response.data.data);
+        } catch (error) {
+            console.error("Error While Fetching the package titles:", error);
+        } finally {
+            setLoadingTitles(false);
         }
-    ]
+    }
+
+    const fetchPackages = async () => {
+        try {
+            const response = await axios.get('http://localhost:6842/api/v1/get-all-package');
+            setPackages(response.data.data);
+        } catch (error) {
+            console.error("Error While Fetching the packages:", error);
+        } finally {
+            setLoadingPackages(false);
+        }
+    }
+
+    const fetchTestCategories = async () => {
+        try {
+            const response = await axios.get('http://localhost:6842/api/v1/get-all-test-category');
+            setTestCategories(response.data.data);
+        } catch (error) {
+            console.error("Error While Fetching the test categories:", error);
+        } finally {
+            setLoadingTestCategories(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchPackageTitle();
+        fetchPackages();
+        fetchTestCategories();
+    }, []);
+
+    const getPackageDetails = (packageName) => {
+        return packages.find(pack => pack.packageName === packageName);
+    }
+
+    const getTestCategoryDetails = (testName) => {
+        return testCategories.find(category => category.testCategoryName === testName);
+    }
+
+    const calculateTotalTests = (testCategoryNames) => {
+        return testCategoryNames.reduce((total, testName) => {
+            const testDetails = getTestCategoryDetails(testName);
+            return total + (testDetails ? testDetails.testNumber : 0);
+        }, 0);
+    }
+
+    const handleViewMore = (categoryTitle) => {
+        navigate(`/${categoryTitle.replace(/\s+/g, '-')}`); // Use navigate instead of history.push
+    }
 
     return (
         <>
-            <section className="packages my-5">
-                <div className="container">
-                    <div className="grid-3">
-                        {packageList && packageList.map((item, index) => (
-                            <div className="single-package" key={index}>
-                                <div className="main-head">
-                                    <h4>{item.packageName}</h4>
-                                    <div className="flex">
-                                        <small>({item.testQuantity} Tests)</small>
-                                        <div className="price">
-                                            <div className="current_price">{item.currentPrice}</div>
-                                            <small className="actual_price">{item.actualPrice}</small>
-                                        </div>
+            {loadingTitles || loadingPackages || loadingTestCategories ? (
+                <Loading /> // Show loading indicator
+            ) : (
+                packageTitles && packageTitles.map((item, index) => (
+                    <div key={index}>
+                        <Head title={item.packageTitle} />
 
-                                    </div>
+                        <section className="packages">
+                            <div className="container">
+                                <div className="grid-3">
+                                    {item.packages.slice(0, 6).map((pack, idx) => {
+                                        const packageDetails = getPackageDetails(pack);
+                                        if (!packageDetails) return null;
+                                        
+                                        const totalTests = calculateTotalTests(packageDetails.testCategoryName);
+                                        
+                                        return (
+                                            <div className="single-package" key={idx}>
+                                                <div className="main-head">
+                                                    <h4>{packageDetails.packageName}</h4>
+                                                    <div className="flex">
+                                                        <small>({totalTests} Tests)</small>
+                                                        <div className="price">
+                                                            <div className="current_price">{packageDetails.currentPrice}</div>
+                                                            <small className="actual_price">{packageDetails.actualPrice}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="test-cate">
+                                                    {packageDetails.testCategoryName.map((test, ind) => {
+                                                        const testDetails = getTestCategoryDetails(test);
+                                                        return (
+                                                            <div className="single" key={ind}>
+                                                                <div className="naam">{testDetails.testCategoryName} ({testDetails.testNumber})</div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                                <div className="content">
+                                                    <div className="book-btn">
+                                                        <Link to="/cart">Book Now <i className="fa-solid fa-flask-vial"></i></Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                                <div className="test-cate">
-                                    {item.testCategories && item.testCategories.map((tests,ind) => (
-                                        <div className="single" key={ind}>
-                                            <div className="naam">{tests.testName} <span>({tests.testNumber})</span></div>
+                                {item.packages.length > 6 && (
+                                    <>
+                                        <div className="view-more-container">
+                                            <button className='viewMoreBtn' onClick={() => handleViewMore(item.packageTitle)}>View More</button>
                                         </div>
-                                    ))}
-                                </div>
-                                <div className="content">
-                                    {/* <p> <i className="fa-solid fa-circle-check"></i> Free Home Collection</p> */}
-                                    <div className="book-btn">
-                                        <Link to="/cart">Book Now <i className="fa-solid fa-flask-vial"></i></Link>
-                                    </div>
-
-                                </div>
+                                    </>
+                                )}
                             </div>
-
-                        ))}
+                        </section>
                     </div>
-                </div>
-            </section>
+                ))
+            )}
         </>
     )
 }
 
-export default Packages
+export default Packages;
