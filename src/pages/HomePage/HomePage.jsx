@@ -148,7 +148,7 @@ const HomePage = () => {
 
 
       {/* --- All Type Of Packages --- */}
-      <Packages/>
+      {/* <Packages/> */}
 
       {/* ---- Tests ---  */}
       <Head title="Lab Mantra Popular Tests" />
