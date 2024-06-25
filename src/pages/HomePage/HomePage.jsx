@@ -36,6 +36,31 @@ const HomePage = () => {
     fetchTest();
   }, [])
 
+  // Add To Cart
+
+  const [cart, setCart] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const handleAddToCart = (test) => {
+      let updatedCart = [...cart];
+      let message = '';
+      if (cart.some(item => item._id === test._id)) {
+          updatedCart = updatedCart.filter(item => item._id !== test._id);
+          message = `${test.testName} Removed from cart`;
+      } else {
+          updatedCart.push(test);
+          message = `${test.testName} added to cart`;
+      }
+      setCart(updatedCart);
+      sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+      setPopupMessage(message);
+      setShowPopup(true);
+      setTimeout(() => {
+          setShowPopup(false);
+      }, 2000);
+  }
+
   return (
     <>
 
@@ -50,11 +75,11 @@ const HomePage = () => {
             <div className="flex-content">
               <form >
                 <div className="input-fd">
-                  <i class="fa-solid fa-location-crosshairs"></i>
+                  <i className="fa-solid fa-location-crosshairs"></i>
                   <input type="text" placeholder="Enter City" />
                 </div>
                 <div className="input-fd">
-                  <i class="fa-brands fa-searchengin"></i>
+                  <i className="fa-brands fa-searchengin"></i>
                   <input type="text" placeholder="Add Multiple Test to find labs" />
                 </div>
 
@@ -158,35 +183,37 @@ const HomePage = () => {
 
           <div className="grid-3">
             {tests.slice(0,visibleTests).map((item, index) => (
-              <div className="single-test" key={index}>
-                <h4>{item.testName}</h4>
-                <div className="flex">
+              <div className="single-test">
+              <h4>{item.testName}</h4>
+              <div className="flex">
                   <div className="price">
-                    {item.discountPrice ? (
-                      <>
-                      
-                      <span className="discount_price">₹{item.discountPrice}</span>
-                      <span className="actual_price">₹{item.actualPrice}</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="discount_price">₹{item.actualPrice}</span>
-                      </>
-                    )}
-
+                      {item.discountPrice ? (
+                          <>
+                              <span className="discount_price">₹{item.discountPrice}</span>
+                              <span className="actual_price">₹{item.actualPrice}</span>
+                          </>
+                      ) : (
+                          <>
+                              <span className="discount_price">₹{item.actualPrice}</span>
+                          </>
+                      )}
                   </div>
-                  <Link to="/cart" className="bookBtn">
-                    BOOK
-                  </Link>
-                </div>
-
-                {item.discountPercentage ? (
-                  <div className="abso">
-                    <span>{item.discountPercentage}% Off</span>
-                  </div>
-                ) : null}
-
+                  {cart.some(cartItem => cartItem._id === item._id) ? (
+                      <button onClick={() => handleAddToCart(item)} className="bookBtn">
+                          REMOVE
+                      </button>
+                  ) : (
+                      <button onClick={() => handleAddToCart(item)} className="bookBtn">
+                          BOOK
+                      </button>
+                  )}
               </div>
+              {item.discountPercentage ? (
+                  <div className="abso">
+                      <span>{item.discountPercentage}% Off</span>
+                  </div>
+              ) : null}
+          </div>
             ))}
           </div>
 
@@ -208,6 +235,13 @@ const HomePage = () => {
       </section>
 
       <Contact />
+
+      {/* Add To Cart  */}
+      {showPopup && (
+          <div className="popup">
+              <p>{popupMessage}</p>
+          </div>
+      )}
 
     </>
   )

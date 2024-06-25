@@ -63,7 +63,7 @@ const CartPage = () => {
                                             <h5 className='test-name'>{item.testName}</h5>
                                             <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
                                         </div>
-                                        <button className="re-btn" onClick={() => handleRemoveFromCart(item._id)}><i class="fa-solid fa-trash-can"></i></button>
+                                        <button className="re-btn" onClick={() => handleRemoveFromCart(item._id)}><i className="fa-solid fa-trash-can"></i></button>
                                     </div>
                                 ))}
                             </div>

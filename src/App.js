@@ -28,15 +28,12 @@ function App() {
             <Route path='/about-us' element={<AboutPage />} />
             <Route path='/contact-us' element={<ContactPage />} />
 
-            <Route path='/lab-tests' element={<AllTest />} />
 
+            <Route path='/lab-tests' element={<AllTest />} />
             <Route path='/lab-tests/:testname' element={<SearchByTest />} />
 
-            {/* <Route path='/book-your-test' element={<AllTest />} /> */}
             <Route path='/our-packages' element={<PackagesPage />} />
-            {/* <Route path='/cart' element={<Booking />} /> */}
-            <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
-            <Route path='/report-status' element={<UserReport />} />
+            
 
             {/* ------- Authentication ---------  */}
             <Route path='/login' element={<Login />} />
@@ -47,9 +44,12 @@ function App() {
 
             {/* --- Route by package names -- */}
             <Route path='/packages/:packageTitle' element={<PackageByTitlePage />} />
-
             <Route path='/cart' element={<CartPage />} />
 
+
+            <Route path='/report-status' element={<UserReport />} />
+            <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
+            <Route path='/booking' element={<Booking />} />
 
           </Routes>
         <Footer/>
