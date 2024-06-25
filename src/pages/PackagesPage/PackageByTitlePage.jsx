@@ -63,13 +63,11 @@ const PackageByTitlePage = () => {
 
     // Filter packages by packageTitle
     const filteredPackages = packages.filter(pack =>
-        pack.packageName.toLowerCase().includes(packageTitle.toLowerCase())
+        console.log("True :",pack.packageName.toLowerCase() === packageTitle.toLowerCase())
+        // console.log(pack.packageName.toLowerCase() === packageTitle.toLowerCase())
+        // pack.packageName.toLowerCase().includes(packageTitle.toLowerCase())
     );
 
-    // Function to get package details by packageName
-    const getPackageDetails = (packageName) => {
-        return packages.find(pack => pack.packageName === packageName);
-    };
 
     // Function to get total number of tests for a package
     const calculateTotalTests = (testCategoryNames) => {

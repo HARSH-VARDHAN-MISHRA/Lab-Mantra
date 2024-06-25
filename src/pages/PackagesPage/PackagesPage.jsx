@@ -24,14 +24,6 @@ const PackagesPage = () => {
             </div>
         </section>
 
-        <Head title="Latest Packages" />
-        <Packages/>
-
-        <Head title="Women Packages" />
-        <Packages/>
-
-        <Head title="Men Packages" />
-        <Packages/>
     </>
   )
 }

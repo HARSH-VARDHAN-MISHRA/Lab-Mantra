@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Header.css'
 import logo from '../../Assets/logo.png'
+import axios from 'axios'
 
 const Header = () => {
     const [toogleMenu,setToogleMenu] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [allTestNames, setAllTestNames] = useState([]);
+    const navigate = useNavigate();
 
     const handleOpenMenu = () =>{
         setToogleMenu(true);
@@ -12,6 +16,42 @@ const Header = () => {
     const handleCloseMenu = () =>{
         setToogleMenu(false);
     }
+
+    useEffect(() => {
+        // Fetch test names from API
+        const fetchTestNames = async () => {
+            try {
+                const response = await axios.get('http://localhost:6842/api/v1/get-all-test');
+                if (response.data.success) {
+                    const testNames = response.data.data.map(test => test.testName);
+                    setAllTestNames(testNames);
+                } else {
+                    console.error('Failed to fetch test names:', response.data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching test names:', error);
+            }
+        };
+
+        fetchTestNames();
+    }, []);
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+    };
+
+    // Filter test names based on input value
+    const filteredTests = allTestNames.filter((test) =>
+        test.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Redirect to test details page
+    const handleTestClick = (testName) => {
+        navigate(`/lab-tests/${testName.replace(/ /g, '-')}`);
+        setSearchTerm("")
+    };
+
   return (
     <>
         <header>
@@ -20,8 +60,26 @@ const Header = () => {
                     <a href="tel:+918826936006"> <i className="fa-solid fa-phone-volume"></i>+91-8826936006</a>
                 </div>
                 <div className="search-bar">
-                    <input type="text" name="search" placeholder="Search for tests..." />
+                    <input 
+                        type="text"
+                        name="search"
+                        value={searchTerm}
+                        onChange={handleInputChange}
+                        placeholder="Search for tests..."
+                        autoComplete="off"
+                    />
                     <i className="fa-solid fa-magnifying-glass"></i>
+
+                    {/* Suggested Test Names */}
+                    {searchTerm && filteredTests.length > 0 && (
+                        <div className="suggested-tests">
+                            <ul>
+                                {filteredTests.map((test, index) => (
+                                    <li key={index}><div  onClick={() => handleTestClick(test)} >{test}</div></li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
                 <div className="book-btn">
                     <Link to="/book-test" >
@@ -40,7 +98,7 @@ const Header = () => {
                     <ul>
                         <li><Link onClick={handleCloseMenu} to="/">Home</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/about-us">About Us</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/book-your-test">Book Test</Link></li>
+                        <li><Link onClick={handleCloseMenu} to="/lab-tests">Book Test</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/our-packages">Our Packages</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/report-status">Check Report</Link></li>
                         <li><Link onClick={handleCloseMenu} to="/contact-us">Contact Us</Link></li>

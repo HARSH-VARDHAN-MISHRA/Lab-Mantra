@@ -70,7 +70,8 @@ const Packages = () => {
     }
 
     const handleViewMore = (categoryTitle) => {
-        navigate(`/${categoryTitle.replace(/\s+/g, '-')}`); // Use navigate instead of history.push
+        // navigate(`packages/${categoryTitle.replace(/\s+/g, '-')}`); // Use navigate instead of history.push
+        navigate(`packages/${categoryTitle}`); // Use navigate instead of history.push
     }
 
     return (

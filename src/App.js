@@ -15,6 +15,8 @@ import ForgetPassword from './components/Login/ForgetPassword';
 import UserReport from './pages/UserReport/UserReport';
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 import PackageByTitlePage from './pages/PackagesPage/PackageByTitlePage';
+import CartPage from './pages/CartPage/CartPage';
+import SearchByTest from './pages/AllTest/SearchByTest';
 
 function App() {
   return (
@@ -25,10 +27,14 @@ function App() {
             <Route path='/' element={<HomePage />} />
             <Route path='/about-us' element={<AboutPage />} />
             <Route path='/contact-us' element={<ContactPage />} />
+
             <Route path='/lab-tests' element={<AllTest />} />
+
+            <Route path='/lab-tests/:testname' element={<SearchByTest />} />
+
             {/* <Route path='/book-your-test' element={<AllTest />} /> */}
             <Route path='/our-packages' element={<PackagesPage />} />
-            <Route path='/cart' element={<Booking />} />
+            {/* <Route path='/cart' element={<Booking />} /> */}
             <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
             <Route path='/report-status' element={<UserReport />} />
 
@@ -40,7 +46,9 @@ function App() {
             <Route path='/user-profile' element={<UserProfilePage />} />
 
             {/* --- Route by package names -- */}
-            <Route path='/:packageTitle' element={<PackageByTitlePage />} />
+            <Route path='/packages/:packageTitle' element={<PackageByTitlePage />} />
+
+            <Route path='/cart' element={<CartPage />} />
 
 
           </Routes>

@@ -8,6 +8,9 @@ const AllTest = () => {
     const [itemsPerPage] = useState(12);
     const [totalItems, setTotalItems] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
+    const [cart, setCart] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
 
     const fetchTests = async (page) => {
         try {
@@ -41,7 +44,28 @@ const AllTest = () => {
             behavior: "smooth"
         });
         fetchTests(currentPage);
-    }, [currentPage])
+        const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        setCart(storedCart);
+    }, [currentPage]);
+
+    const handleAddToCart = (test) => {
+        let updatedCart = [...cart];
+        let message = '';
+        if (cart.some(item => item._id === test._id)) {
+            updatedCart = updatedCart.filter(item => item._id !== test._id);
+            message = `${test.testName} Removed from cart`;
+        } else {
+            updatedCart.push(test);
+            message = `${test.testName} added to cart`;
+        }
+        setCart(updatedCart);
+        sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+        setPopupMessage(message);
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 2000);
+    }
 
     // Filter tests based on search term
     const filteredTests = tests.filter(item =>
@@ -177,9 +201,15 @@ const AllTest = () => {
                                                     </>
                                                 )}
                                             </div>
-                                            <Link to="/cart" className="bookBtn">
-                                                BOOK
-                                            </Link>
+                                            {cart.some(cartItem => cartItem._id === item._id) ? (
+                                                <button onClick={() => handleAddToCart(item)} className="bookBtn">
+                                                    REMOVE
+                                                </button>
+                                            ) : (
+                                                <button onClick={() => handleAddToCart(item)} className="bookBtn">
+                                                    BOOK
+                                                </button>
+                                            )}
                                         </div>
                                         {item.discountPercentage ? (
                                             <div className="abso">
@@ -204,6 +234,13 @@ const AllTest = () => {
                     </div>
                 </div>
             </section>
+
+
+            {showPopup && (
+                <div className="popup">
+                    <p>{popupMessage}</p>
+                </div>
+            )}
         </>
     )
 }
