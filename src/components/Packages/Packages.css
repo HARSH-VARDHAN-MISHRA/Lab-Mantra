@@ -56,6 +56,35 @@
     text-align: end;
 }
 
+
+
+.single-package .test-cate .single{
+    position: relative;
+}
+.single-package .test-cate .single .test-names{
+    position: absolute;
+    background: var(--bg-light-green);
+    z-index: 50;
+    font-size: 0.7rem;
+    color: white;
+    padding: 0.2rem;
+    border-radius: 2px;
+    bottom: 100%;
+}
+.single-package .test-cate .single .test-names>div{
+    text-wrap: nowrap;
+}
+
+.single-package .test-cate .single:nth-child(even) .test-names{
+    right: 0;
+}
+
+/* Example CSS for Tooltip */
+
+
+
+
+
 .single-package .content{
     padding-top: 1rem;
     text-align: center;
@@ -65,6 +94,7 @@
     color: red;
     margin-bottom: 0.3rem;
 }
+.single-package .content .book-btn button ,
 .single-package .content .book-btn a{
     color: white;
     background: var(--bg-greenblue);
@@ -75,15 +105,20 @@
     margin: auto;
     text-decoration: none;
     transition: var(--transition-3);
+    border: none;
+    outline: none;
 }
+.single-package .content .book-btn button i,
 .single-package .content .book-btn a i{
     transition: var(--transition-3);
 }
+.single-package .content .book-btn button:hover i ,
 .single-package .content .book-btn a:hover i{
     padding-left: 1rem;
 }
 
 @media only screen and (max-width: 420px){
+    .single-package .content .book-btn button ,
     .single-package .content .book-btn a {
         width: 80%;
     }

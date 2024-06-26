@@ -34,7 +34,7 @@ function App() {
             <Route path='/lab-tests/:testname' element={<SearchByTest />} />
 
             <Route path='/our-packages' element={<PackagesPage />} />
-            
+            <Route path='/our-packages/:packagename' element={<PackageByTitlePage />} />
 
             {/* ------- Authentication ---------  */}
             <Route path='/login' element={<Login />} />
@@ -44,7 +44,6 @@ function App() {
             <Route path='/user-profile' element={<UserProfilePage />} />
 
             {/* --- Route by package names -- */}
-            <Route path='/packages/:packageTitle' element={<PackageByTitlePage />} />
             <Route path='/cart' element={<CartPage />} />
             <Route path='/proceed-to-book' element={<GetAddress />} />
 

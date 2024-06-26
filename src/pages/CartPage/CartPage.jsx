@@ -9,25 +9,36 @@ const CartPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
         const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
         setCart(storedCart);
     }, []);
 
-    const handleRemoveFromCart = (testId) => {
-        const updatedCart = cart.filter(item => item._id !== testId);
+    const handleRemoveFromCart = (itemId) => {
+        const updatedCart = cart.filter(item => item._id !== itemId);
         setCart(updatedCart);
         sessionStorage.setItem('cart', JSON.stringify(updatedCart));
     }
 
     const handleCouponApply = () => {
         if (coupon === 'SS10') {
-            setDiscount(cart.reduce((acc, item) => acc + (item.actualPrice * 0.1), 0));
+            setDiscount(cart.reduce((acc, item) => acc + (item.discountPrice || item.actualPrice) * 0.1, 0));
         } else {
             setDiscount(0);
         }
     }
 
-    const subtotal = cart.reduce((acc, item) => acc + (item.discountPrice || item.actualPrice), 0);
+    const subtotal = cart.reduce((acc, item) => {
+        if (item.packageName) {
+            return acc + item.currentPrice;
+        } else {
+            return acc + (item.discountPrice || item.actualPrice);
+        }
+    }, 0);
+
     const homeCollectionCharges = subtotal >= 649 ? 0 : 150;
     const totalToPay = subtotal + homeCollectionCharges - discount;
 
@@ -61,7 +72,7 @@ const CartPage = () => {
                 <div className="container">
                     <div className="head-line">
                         <div className="flex">
-                            <h2>TESTS IN YOUR CART ({cart.length})</h2>
+                            <h2>ITEMS IN YOUR CART ({cart.length})</h2>
                             <Link className='addTest' to={`/lab-tests`}>Add Tests</Link>
                         </div>
                     </div>
@@ -72,8 +83,18 @@ const CartPage = () => {
                                 {cart.map(item => (
                                     <div key={item._id} className="cart-item d-flex justify-content-between align-items-start py-2">
                                         <div>
-                                            <h5 className='test-name'>{item.testName}</h5>
-                                            <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
+                                            {item.testName && ( // Render for individual tests
+                                                <>
+                                                    <h5 className='test-name'>{item.testName}</h5>
+                                                    <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
+                                                </>
+                                            )}
+                                            {item.packageName && ( // Render for packages
+                                                <>
+                                                    <h5 className='test-name'>{item.packageName}</h5>
+                                                    <div className="text-muted">₹{item.currentPrice}</div>
+                                                </>
+                                            )}
                                         </div>
                                         <button className="re-btn" onClick={() => handleRemoveFromCart(item._id)}><i className="fa-solid fa-trash-can"></i></button>
                                     </div>

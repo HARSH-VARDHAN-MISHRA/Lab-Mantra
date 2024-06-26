@@ -24,6 +24,8 @@ const PackagesPage = () => {
             </div>
         </section>
 
+        <Packages/>
+
     </>
   )
 }
