@@ -17,6 +17,7 @@ import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 import PackageByTitlePage from './pages/PackagesPage/PackageByTitlePage';
 import CartPage from './pages/CartPage/CartPage';
 import SearchByTest from './pages/AllTest/SearchByTest';
+import GetAddress from './pages/CheckoutPage/GetAddress';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             {/* --- Route by package names -- */}
             <Route path='/packages/:packageTitle' element={<PackageByTitlePage />} />
             <Route path='/cart' element={<CartPage />} />
+            <Route path='/proceed-to-book' element={<GetAddress />} />
 
 
             <Route path='/report-status' element={<UserReport />} />

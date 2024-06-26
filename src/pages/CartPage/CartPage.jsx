@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CartPage.css';
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
     const [coupon, setCoupon] = useState('');
     const [discount, setDiscount] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
@@ -30,6 +31,18 @@ const CartPage = () => {
     const homeCollectionCharges = subtotal >= 649 ? 0 : 150;
     const totalToPay = subtotal + homeCollectionCharges - discount;
 
+    const handleContinue = () => {
+        const cartDetails = {
+            cart,
+            subtotal,
+            homeCollectionCharges,
+            discount,
+            totalToPay
+        };
+        sessionStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+        navigate('/proceed-to-book');
+    }
+
     return (
         <>
             <section className="bread">
@@ -46,7 +59,6 @@ const CartPage = () => {
 
             <section className="cart-page py-5">
                 <div className="container">
-
                     <div className="head-line">
                         <div className="flex">
                             <h2>TESTS IN YOUR CART ({cart.length})</h2>
@@ -67,16 +79,14 @@ const CartPage = () => {
                                     </div>
                                 ))}
                             </div>
-
                         </div>
                         <div className="col-md-1"></div>
                         <div className="col-md-4">
                             <div className="cart-side">
-
-                                <div className="coupon p-2 ">
+                                <div className="coupon p-2">
                                     <div className="appy-cop">
-                                        <input type="text" placeholder='ENTER COUPON CODE' />
-                                        <button>Apply Coupon</button>
+                                        <input type="text" placeholder='ENTER COUPON CODE' value={coupon} onChange={(e) => setCoupon(e.target.value)} />
+                                        <button onClick={handleCouponApply}>Apply Coupon</button>
                                     </div>
                                     <p><small>Please Login To Apply</small></p>
                                 </div>
@@ -99,11 +109,10 @@ const CartPage = () => {
                                         <span>₹{totalToPay}</span>
                                     </div>
                                 </div>
-                                <Link className='link' to={``}>Continue</Link>
+                                <button className='link' onClick={handleContinue}>Continue</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
         </>
