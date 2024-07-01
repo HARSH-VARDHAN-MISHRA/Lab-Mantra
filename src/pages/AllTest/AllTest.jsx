@@ -14,13 +14,14 @@ const AllTest = () => {
 
     const fetchTests = async (page) => {
         try {
-            const res = await axios.get(`http://localhost:6842/api/v1/get-all-test?page=${page}&limit=${itemsPerPage}`);
+            const res = await axios.get(`https://lab-mantra-backend.onrender.com/api/v1/get-all-test?page=${page}&limit=${itemsPerPage}`);
             setTests(res.data.data);
             setTotalItems(res.data.data.length || 0);
         } catch (error) {
             console.error("Something went wrong while fetching tests: ", error);
         }
     }
+    // hello 
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));

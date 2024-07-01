@@ -11,7 +11,7 @@ const SearchByTest = () => {
 
     const fetchTestDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:6842/api/v1/get-all-test`);
+            const response = await axios.get(`https://lab-mantra-backend.onrender.com/api/v1/get-all-test`);
             if (response.data.success) {
                 const test = response.data.data.find(test => test.testName.toLowerCase().replace(/-/g, ' ') === testname.toLowerCase().replace(/-/g, ' '));
 

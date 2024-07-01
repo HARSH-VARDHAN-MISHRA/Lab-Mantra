@@ -21,7 +21,7 @@ const Header = () => {
         // Fetch test names from API
         const fetchTestNames = async () => {
             try {
-                const response = await axios.get('http://localhost:6842/api/v1/get-all-test');
+                const response = await axios.get('https://lab-mantra-backend.onrender.com/api/v1/get-all-test');
                 if (response.data.success) {
                     const testNames = response.data.data.map(test => test.testName);
                     setAllTestNames(testNames);

@@ -22,7 +22,7 @@ const HomePage = () => {
 
   const fetchTest = async () => {
     try {
-      const res = await axios.get("http://localhost:6842/api/v1/get-all-test");
+      const res = await axios.get("https://lab-mantra-backend.onrender.com/api/v1/get-all-test");
       setTests(res.data.data);
     } catch (error) {
       console.error("Something Issue to fetch Tests: ", error);
