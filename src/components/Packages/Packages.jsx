@@ -22,7 +22,7 @@ const Packages = () => {
         try {
             const response = await axios.get('http://localhost:6842/api/v1/get-all-package-title');
             setPackageTitles(response.data.data);
-            console.log('Package Titles:', response.data.data); // Debug log
+            // console.log('Package Titles:', response.data.data); // Debug log
         } catch (error) {
             console.error("Error while fetching the package titles:", error);
         } finally {
@@ -34,7 +34,7 @@ const Packages = () => {
         try {
             const response = await axios.get('http://localhost:6842/api/v1/get-all-package');
             setPackages(response.data.data);
-            console.log('Packages:', response.data.data); // Debug log
+            // console.log('Packages:', response.data.data); // Debug log
         } catch (error) {
             console.error("Error while fetching the packages:", error);
         } finally {
@@ -46,7 +46,7 @@ const Packages = () => {
         try {
             const response = await axios.get('http://localhost:6842/api/v1/get-all-test-category');
             setTestCategories(response.data.data);
-            console.log('Test Categories:', response.data.data); // Debug log
+            // console.log('Test Categories:', response.data.data); // Debug log
         } catch (error) {
             console.error("Error while fetching the test categories:", error);
         } finally {
