@@ -1,9 +1,54 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
 import sideBg from './sideBg.webp'
 
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
+    const navigate = useNavigate();
+    const [loading,setLoading] = useState(false);
+    const [formData,setFormData] = useState({
+        password:'',
+        email:''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }))
+    }
+    const handleSubmit = async (event) =>{
+        setLoading(true)
+        event.preventDefault();
+        try {
+            const response = await axios.post('https://lab-mantra-backend.onrender.com/api/v1/login',formData);
+            setLoading(false)
+            console.log(response.data);
+            toast.success('Login SuccessFull')
+            localStorage.setItem('labMantraToken',response.data.token);
+            localStorage.setItem('labMantraUser', JSON.stringify(response.data.user));
+            navigate('/')
+
+        } catch (error) {
+            console.log("Error While Login",error.response.data)
+            if (error.response && error.response.data) {
+                console.log("error.response",error)
+                console.log(error.response.data);
+                toast.error(error.response.data.msg);
+            } else {
+                console.log(error.response.data.msg);  // Fallback to the error's message if no response
+                toast.error('An unexpected error occurred');
+            }
+        
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -23,15 +68,15 @@ const Login = () => {
                             <h1>Welcome Back !</h1>
                             <p>Please login with your personal Details</p>
                         </div>
-                        <div className="form">
+                        <div className="form" onSubmit={handleSubmit}>
                             <form>
                                 <div className="input-field">
                                     <i className="fa-solid fa-envelope"></i>
-                                    <input type="email" autoFocus placeholder="Enter Email" required />
+                                    <input type="email" value={formData.email} name='email' onChange={handleChange} placeholder="Enter Email" required />
                                 </div>
                                 <div className="input-field">
                                     <i className="fa-solid fa-lock"></i>
-                                    <input type="password" placeholder="Enter Password" required />
+                                    <input type="password" value={formData.password} name='password' onChange={handleChange}  placeholder="Enter Password" required />
                                 </div>
 
                                 <div className="">
@@ -39,7 +84,9 @@ const Login = () => {
                                     <div></div>
                                 </div>
                                 
-                                <button type='submit'>Login</button>
+                                <button type='submit' disabled={loading} className={`${loading ? 'not-allowed':'allowed' }`}>
+                                    {loading ? "Please Wait ..." : "Login"}
+                                </button>
                             </form>
 
                             <div className="tagline">

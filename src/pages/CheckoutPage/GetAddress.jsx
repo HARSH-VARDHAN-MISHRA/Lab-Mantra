@@ -20,7 +20,7 @@ const GetAddress = () => {
     });
 
     useEffect(() => {
-        const storedDetails = JSON.parse(sessionStorage.getItem('cartDetails')) || {};
+        const storedDetails = JSON.parse(localStorage.getItem('cartDetails')) || {};
         setCartDetails(storedDetails);
     }, []);
 

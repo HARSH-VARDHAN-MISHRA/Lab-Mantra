@@ -19,11 +19,16 @@ import CartPage from './pages/CartPage/CartPage';
 import SearchByTest from './pages/AllTest/SearchByTest';
 import GetAddress from './pages/CheckoutPage/GetAddress';
 
+import { ToastContainer, toast } from 'react-toastify';
+import OtpSignUp from './components/Login/OtpSignUp';
+
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Header/>
+        <ToastContainer />
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/about-us' element={<AboutPage />} />
@@ -38,10 +43,13 @@ function App() {
 
             {/* ------- Authentication ---------  */}
             <Route path='/login' element={<Login />} />
-            <Route path='/sign-up' element={<SignIn />} />
             <Route path='/login/forget-password' element={<ForgetPassword />} />
+            <Route path='/sign-up' element={<SignIn />} />
+            <Route path='/sign-up/confirm-account/:email' element={<OtpSignUp />} />
 
-            <Route path='/user-profile' element={<UserProfilePage />} />
+            <Route path='/profile' element={<UserProfilePage />} />
+         
+
 
             {/* --- Route by package names -- */}
             <Route path='/cart' element={<CartPage />} />

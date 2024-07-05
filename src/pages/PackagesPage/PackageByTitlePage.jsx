@@ -61,7 +61,7 @@ const PackageByTitlePage = () => {
         fetchPackageTitles();
         fetchPackages();
         fetchTestCategories();
-        const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        const storedCart = JSON.parse(localStorage.getItem('lab-cart')) || [];
         setCart(storedCart);
     }, []);
 
@@ -90,7 +90,7 @@ const PackageByTitlePage = () => {
             message = `${packageDetails.packageName} added to cart`;
         }
         setCart(updatedCart);
-        sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+        localStorage.setItem('lab-cart', JSON.stringify(updatedCart));
         setPopupMessage(message);
         setShowPopup(true);
         setTimeout(() => {

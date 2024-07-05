@@ -114,3 +114,10 @@
         margin-bottom: 0rem;
     }
 }
+
+
+
+/* ======== emptycart ==========  */
+.emptycart h1{
+    color: var(--color-blue);
+}

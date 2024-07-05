@@ -52,6 +52,14 @@ const Header = () => {
         setSearchTerm("")
     };
 
+    const token = localStorage.getItem('labMantraToken')
+    const User = localStorage.getItem("labMantraUser")
+    const user = JSON.parse(User)
+
+    // Ensure 'lab-cart' is not null before accessing its length
+    const cart = JSON.parse(localStorage.getItem('lab-cart')) || [];
+    const cartLength = cart.length;
+
   return (
     <>
         <header>
@@ -108,12 +116,22 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="tabs">
-                    <Link to="/sign-up" className='profile'>
-                        <i className="fa-solid fa-circle-user"></i>
-                    </Link>
+                    {token ? (
+                        <Link to="/profile" className='profile'>
+                            <i className="fa-solid fa-circle-user"></i>
+                        </Link>
+
+                    ) : (
+                        <div >
+                            <Link to="/login" className='profile fs-6'> Login </Link> <span style={{color:"var(--bg-dark-blue)"}}>|</span>
+                            <Link to="/sign-up" className='profile fs-6'> Create </Link>
+                        </div>
+                    )}
                     <Link to="/cart" className='cart'>
                         <i className="fa-solid fa-cart-plus"></i>
-                        <div className="number">1</div>
+                        <div className="number">
+                        {cartLength}
+                        </div>
                     </Link>
                     <div className="toogle-bar" onClick={handleOpenMenu}>
                         <i className="fa-solid fa-bars"></i>

@@ -1,38 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import './UserProfilePage.css'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './UserProfilePage.css';
+import { toast } from 'react-toastify';
 
 
 const UserProfilePage = () => {
-
-    const [activeTab, setActiveTab] = useState('home');
-    const [options, setOptions] = useState([]);
-
-
-    const handleTabClick = (tabId) => {
-        setActiveTab(tabId);
-    };
+    const [activeTab, setActiveTab] = useState('profile');
+    const [userData, setUserData] = useState(null); // State to hold user data
 
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
-    }, [])
+        // Fetch user data from localStorage
+        const user = JSON.parse(localStorage.getItem('labMantraUser'));
+        if (user) {
+            setUserData(user);
+        }
+    }, []); // Empty dependency array ensures this runs only once on component mount
 
-    const userProfile = {
-        id: "drtfgyuh12",
-        userImg: "https://avatars.githubusercontent.com/u/165280972?v=4",
-        userName: "Harsh Vardhan Mishra",
-        mobileNumber: 9876543210,
-        EmailId: "harshfriend@gmail.com",
-        Address: "Shop No.12, Sec 24, Pocket- 26, Rohini, New Delhi, Delhi 110085"
-    }
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+    };
+
+    const handleLogout = () => {
+        
+        localStorage.removeItem('labMantraToken');
+        localStorage.removeItem('labMantraUser');
+        toast.success('Logged out successfully');
+
+        window.location.href = '/login'; 
+    };
+
     return (
         <>
-            <section className="bread">
+            <section className="bread" >
                 <div className="container">
-                    <nav aria-label="breadcrumb ">
+                    <nav aria-label="breadcrumb">
                         <h2>Your Profile</h2>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to="/">Home</Link></li>
@@ -42,58 +43,67 @@ const UserProfilePage = () => {
                 </div>
             </section>
 
-            <section className="profile-page my-5">
+            <section className="profile-tabs">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-4  text-center">
-                            <div className="profile-img">
-                                <img src={userProfile.userImg} alt="" />
+                    <ul className="nav nav-tabs">
+                        <li className="nav-item">
+                            <button
+                                className={`nav-link ${activeTab === 'profile' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('profile')}
+                            >
+                                My Profile
+                            </button>
+                        </li>
+                        <li className="nav-item">
+                            <button
+                                className={`nav-link ${activeTab === 'bookings' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('bookings')}
+                            >
+                                My Bookings
+                            </button>
+                        </li>
+                        {/* <li className="nav-item">
+                            <button
+                                className={`nav-link ${activeTab === 'reports' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('reports')}
+                            >
+                                My Reports
+                            </button>
+                        </li> */}
+                    </ul>
+
+                    <div className="tab-content">
+                        {activeTab === 'profile' && userData && (
+                            <div className="tab-pane active">
+                                <h3>Welcome {userData.name} !</h3>
+                                <p>Name: {userData.name}</p>
+                                <p>Email: {userData.email}</p>
+                                <p>Phone Number: {userData.phoneNumber}</p>
+                                <p>Joined: {new Date(userData.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+
+                                <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+
                             </div>
-                            <h4 >{userProfile.userName}</h4>
-                            <p>+91-{userProfile.mobileNumber}</p>
-                        </div>
-                        <div className="col-md-8 booking">
-
-                            <table className="table pro-tab">
-                                <tbody>
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <td className='text-uppercase'>{userProfile.userName}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Mobile Number</th>
-                                        <td>+91-{userProfile.mobileNumber}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Email Id</th>
-                                        <td>{userProfile.EmailId}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Address</th>
-                                        <td>{userProfile.Address}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div className="row gri-2">
-                                <div className="col-md-6 status">
-                                    <h5>Status</h5>
-                                    <p>Collection Collected</p>
-                                </div>
-
-                                <div className="col-md-6 down-repo">
-                                    <h5>View Report</h5>
-                                    <p>Collection Collected</p>
-                                </div>
-                                
+                        )}
+                        {activeTab === 'bookings' && (
+                            <div className="tab-pane active">
+                                <h3>My Booking History</h3>
+                                {/* Placeholder for booking history */}
+                                <p>No bookings yet.</p>
                             </div>
-
-                        </div>
+                        )}
+                        {activeTab === 'reports' && (
+                            <div className="tab-pane active">
+                                <h3>My Reports</h3>
+                                {/* Placeholder for reports */}
+                                <p>No reports yet.</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
         </>
-    )
+    );
 }
 
-export default UserProfilePage
+export default UserProfilePage;

@@ -38,57 +38,41 @@ const HomePage = () => {
     checkLocationAccess();
   }, []);
 
-  // const checkLocationAccess = () => {
-  //   if (!navigator.geolocation) {
-  //     console.log("Geolocation is not supported by your browser");
-  //     return;
-  //   }
-  
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       console.log("Location access granted:", position);
-  //       const { latitude, longitude } = position.coords;
-  //       sessionStorage.setItem('latitude', latitude);
-  //       sessionStorage.setItem('longitude', longitude);
-  //     },
-  //     (error) => {
-  //       console.log("Location access denied:", error);
-  //       setTimeout(() => {
-  //         setLocationPopup(true);
-  //       }, 3000);
-  //     }
-  //   );
-  // };
-  
   const checkLocationAccess = () => {
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported by your browser");
       return;
     }
-  
+
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         try {
+          const GOOGLE_KEY_SECRET = "AIzaSyAwuwFlJ9FbjzZzWEPUqQPomJ8hlXdqwqo";
           const { latitude, longitude } = position.coords;
-  
-          // Example using OpenStreetMap Nominatim for reverse geocoding
-          const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
-          const { address , display_name } = response.data;
-          // console.log(response.data)
 
-          // Extract specific address details as needed
-          const city = address.city;
-          const state = address.state;
-          const postcode = address.postcode;
-          const UserAddress = display_name;
-  
-          // Store in sessionStorage or state as required
+          const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${GOOGLE_KEY_SECRET}`);
+
+          const results = response.data.results;
+          console.log(response.data)
+          console.log("Results From ", results);
+
+          // Save latitude and longitude to session storage
           sessionStorage.setItem('latitude', latitude);
           sessionStorage.setItem('longitude', longitude);
+
+          // Extract and save city to session storage
+          let city = '';
+          results[0].address_components.forEach((component) => {
+              if (component.types.includes('locality')) {
+                  city = component.long_name;
+              }
+          });
           sessionStorage.setItem('city', city);
-          sessionStorage.setItem('state', state);
-          sessionStorage.setItem('postcode', postcode);
-          sessionStorage.setItem('address', display_name);
+
+          // Optionally, save formatted address to session storage
+          const formattedAddress = results[0].formatted_address;
+          sessionStorage.setItem('formattedAddress', formattedAddress);
+
         } catch (error) {
           console.error("Error retrieving location details:", error);
         }
@@ -101,6 +85,7 @@ const HomePage = () => {
       }
     );
   };
+
   
 
   const handleAddToCart = (test) => {
@@ -114,7 +99,7 @@ const HomePage = () => {
       message = `${test.testName} added to cart`;
     }
     setCart(updatedCart);
-    sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+    localStorage.setItem('lab-cart', JSON.stringify(updatedCart));
     setPopupMessage(message);
     setShowPopup(true);
     setTimeout(() => {
@@ -136,10 +121,20 @@ const HomePage = () => {
               <h1>Find Top-Quality Labs <br /> Near You at <br /> <span>Affordable Prices!</span></h1>
             </div>
             <div className="flex-content">
+
+
               <form >
                 <div className="input-fd">
                   <i className="fa-solid fa-location-crosshairs"></i>
-                  <input type="text" placeholder="Enter City" />
+                  <select name="" >
+                    <option value="">{sessionStorage.getItem("city")}</option>
+                    <option value="">Delhi</option>
+                    <option value="">Kolkata</option>
+                    <option value="">Chennai</option>
+                    <option value="">......</option>
+                    <option value="">......</option>
+                    <option value="">......</option>
+                  </select>
                 </div>
                 <div className="input-fd">
                   <i className="fa-brands fa-searchengin"></i>
@@ -147,6 +142,7 @@ const HomePage = () => {
                 </div>
                 <button type="submit">Find Nearest Location</button>
               </form>
+
             </div>
           </div>
         </div>

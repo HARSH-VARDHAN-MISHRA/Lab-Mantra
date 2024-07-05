@@ -50,7 +50,7 @@ const SearchByTest = () => {
             message = `${test.testName} added to cart`;
         }
         setCart(updatedCart);
-        sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+        localStorage.setItem('lab-cart', JSON.stringify(updatedCart));
         setPopupMessage(message);
         setShowPopup(true);
         setTimeout(() => {

@@ -106,7 +106,8 @@
     text-align: center;
     color: var(--color-blue-light);
 }
-.locate .flex-content form .input-fd input{
+.locate .flex-content form .input-fd input , 
+.locate .flex-content form .input-fd select{
     width: 90%;
     border: none;
     outline: none;
