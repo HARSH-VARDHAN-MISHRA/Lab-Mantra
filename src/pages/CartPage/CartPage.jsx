@@ -15,7 +15,7 @@ const CartPage = () => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
-          })
+        })
         const storedCart = JSON.parse(localStorage.getItem('lab-cart')) || [];
         setCart(storedCart);
     }, []);
@@ -57,9 +57,21 @@ const CartPage = () => {
         navigate('/proceed-to-book');
     }
 
+    const token = localStorage.getItem('labMantraToken')
+
+    const [selectedPackage, setSelectedPackage] = useState(null);
+
+    const handleViewPackageDetails = (packageId) => {
+        if (selectedPackage === packageId) {
+            setSelectedPackage(null); // Toggle off if already selected
+        } else {
+            setSelectedPackage(packageId); // Toggle on to show details
+        }
+    };
+
     return (
         <>
-        
+
             {cart.length ? (
                 <>
                     <section className="bread">
@@ -84,29 +96,48 @@ const CartPage = () => {
                             </div>
 
                             <div className="row">
+                                
+
                                 <div className="col-md-7">
                                     <div className="cart-items mb-4">
                                         {cart.map(item => (
                                             <div key={item._id} className="cart-item d-flex justify-content-between align-items-start py-2">
                                                 <div>
-                                                    {item.testName && ( // Render for individual tests
+                                                    {item.testName && (
                                                         <>
-                                                            <h5 className='test-name'>{item.testName}</h5>
+                                                            <h5 className='test-name'>Test : <span className='fw-normal'>{item.testName}</span></h5>
                                                             <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
                                                         </>
                                                     )}
-                                                    {item.packageName && ( // Render for packages
+                                                    {item.packageName && (
                                                         <>
-                                                            <h5 className='test-name'>{item.packageName}</h5>
+                                                            
+                                                            <h5 className='test-name'>Package : <span className='fw-normal'>{item.packageName}</span></h5>
                                                             <div className="text-muted">₹{item.currentPrice}</div>
+                                                            <button className="re-btn fs-6 mt-2" onClick={() => handleViewPackageDetails(item._id)}>
+                                                                {selectedPackage === item._id ? 'Hide Tests' : 'View Tests'}
+                                                            </button>
+                                                            {selectedPackage === item._id && (
+                                                                <ul className="list-unstyled mt-2">
+                                                                    {item.testDetails.map((test, index) => (
+                                                                        <li key={index} className="d-flex justify-content-between">
+                                                                            <span>{test.testName}</span>
+                                                                            <span>₹{test.discountPrice || test.actualPrice}</span>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
                                                         </>
                                                     )}
                                                 </div>
-                                                <button className="re-btn" onClick={() => handleRemoveFromCart(item._id)}><i className="fa-solid fa-trash-can"></i></button>
+                                                <button className="re-btn" onClick={() => handleRemoveFromCart(item._id)}>
+                                                    <i className="fa-solid fa-trash-can"></i>
+                                                </button>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
+
                                 <div className="col-md-1"></div>
                                 <div className="col-md-4">
                                     <div className="cart-side">
@@ -115,7 +146,9 @@ const CartPage = () => {
                                                 <input type="text" placeholder='ENTER COUPON CODE' value={coupon} onChange={(e) => setCoupon(e.target.value)} />
                                                 <button onClick={handleCouponApply}>Apply Coupon</button>
                                             </div>
-                                            <p><small>Please Login To Apply</small></p>
+                                            {token ? "" : (
+                                                <p><small>Please Login To Apply</small></p>
+                                            )}
                                         </div>
 
                                         <div className="totals">
@@ -136,7 +169,12 @@ const CartPage = () => {
                                                 <span>₹{totalToPay}</span>
                                             </div>
                                         </div>
-                                        <button className='link' onClick={handleContinue}>Continue</button>
+                                        {token ? (
+                                            <button className='link' onClick={handleContinue}>Continue</button>
+
+                                        ) : (
+                                            <Link className='link' to={'/login'}>Please Login to continue</Link>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +187,7 @@ const CartPage = () => {
                     <section className="container emptycart my-5">
                         <div className="row">
                             <div className="col-md-4 col-8 mx-auto ">
-                                <img src={emptyCartImage}  alt="Empty Cart Image" />
+                                <img src={emptyCartImage} alt="Empty Cart Image" />
                             </div>
                             <div className="col-12 text-center">
                                 <h1 >Sorry, Your Cart is Empty</h1>

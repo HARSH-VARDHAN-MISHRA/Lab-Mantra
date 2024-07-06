@@ -62,6 +62,16 @@ const GetAddress = () => {
         setActiveTab(tabId);
     };
 
+    // ============================================= 
+    const [visibleTests, setVisibleTests] = useState({});
+
+    const toggleVisibility = (packageId) => {
+        setVisibleTests(prevState => ({
+            ...prevState,
+            [packageId]: !prevState[packageId]
+        }));
+    };
+
     return (
         <>
             <section className="bread">
@@ -81,39 +91,83 @@ const GetAddress = () => {
                 <div className="container">
                     <div className="row">
 
-                        {/* <div className="col-md-6">
-                            <div className="cart-summary mb-4">
-                                <h3 className="mb-3">Cart Summary</h3>
+                        <div className="col-md-6">
+                            <div className="order-summary mb-4" style={{ backgroundColor: '#f0fffe', padding: '20px', borderRadius: '8px' }}>
+                                <h3 className="mb-3" style={{ color: '#003873' }}>Order Summary</h3>
                                 {cart && cart.map(item => (
-                                    <div key={item._id} className="d-flex justify-content-between mb-2">
-                                        <span>{item.testName}</span>
-                                        <span>₹{item.discountPrice || item.actualPrice}</span>
+                                    <div key={item._id} className="cart-item mb-4" style={{ backgroundColor: '#ddf3f2', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+                                        {item.packageName ? (
+                                            <>
+                                                <h5 className="mb-2" style={{ color: '#4377a2' }}>Package: {item.packageName}</h5>
+                                                <div className="d-flex justify-content-between mb-2">
+                                                    <span style={{ color: '#003873' }}>Package Price:</span>
+                                                    <span style={{ color: '#00AAA9' }}>₹{item.currentPrice || item.actualPrice}</span>
+                                                </div>
+
+                                                <button
+                                                    className="btn btn-info mt-1"
+                                                    style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '8px 16px', borderRadius: '4px' }}
+                                                    onClick={() => toggleVisibility(item._id)}
+                                                >
+                                                    {visibleTests[item._id] ? 'Hide Details' : 'View Details'}
+                                                </button>
+                                                {visibleTests[item._id] && (
+                                                    <>
+                                                        <h6 className="mt-3 mb-2" style={{ color: '#4377a2' }}>Tests Included:</h6>
+                                                        <ul className="list-unstyled">
+                                                            {[...new Set(item.testDetails.map(test => test.testName))].map((testName, index) => {
+                                                                const test = item.testDetails.find(t => t.testName === testName);
+                                                                return (
+                                                                    <li key={index} className="d-flex justify-content-between mb-2">
+                                                                        <span>{test.testName}</span>
+                                                                        {/* <span>₹{test.discountPrice || test.actualPrice}</span> */}
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </ul>
+
+                                                    </>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <h5 className="mb-2" style={{ color: '#4377a2' }}>Test: {item.testName}</h5>
+                                                <div className="d-flex justify-content-between mb-2">
+                                                    <span style={{ color: '#003873' }}>Test Price:</span>
+                                                    <span style={{ color: '#00AAA9' }}>₹{item.discountPrice || item.actualPrice}</span>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="col-md-6">
-                            <div className="tot">
-                                <h3 className="mb-3 h4">Payment Details</h3>
+
+                        <div className="col-md-6 mb-3">
+                            <div className="tot" style={{ backgroundColor: 'var(--bg-head)', padding: '20px', borderRadius: '8px' }}>
+                                <h3 className="mb-3 h4" style={{ color: 'var(--bg-dark-blue)' }}>Payment Details</h3>
                                 <div className="d-flex justify-content-between mt-3">
-                                    <span>Subtotal:</span>
+                                    <span style={{ color: 'var(--color-blue)' }}>Subtotal:</span>
                                     <span>₹{subtotal}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-1">
-                                    <span>Home Collection Charges:</span>
+                                    <span style={{ color: 'var(--color-blue)' }}>Home Collection Charges:</span>
                                     <span>₹{homeCollectionCharges}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-1">
-                                    <span>Discount:</span>
+                                    <span style={{ color: 'var(--color-blue)' }}>Discount:</span>
                                     <span>₹{discount}</span>
                                 </div>
-                                <div className="d-flex justify-content-between mt-1 font-weight-bold">
-                                    <span>Total to Pay:</span>
-                                    <span>₹{totalToPay}</span>
+                                <div className="d-flex justify-content-between mt-1 font-weight-bold fs-5">
+                                    <span style={{ color: 'var(--bg-dark-blue)' }}>Total to Pay:</span>
+                                    <span style={{ color: 'var(--color-blue-light)' }}>₹{totalToPay}</span>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
+
+
+
 
 
                         <div className="col-12 tab-pills ">
@@ -233,7 +287,7 @@ const GetAddress = () => {
                                                 <input type="number" className="form-control" id="age" name="age" min="0" required />
                                             </div>
                                             <div className="col-md-12 text-center">
-                                                <Link to="/proceed-to-checkout"  className="btn1">Confirm Booking <i className="fa-solid fa-arrow-right"></i></Link>
+                                                <Link to="/proceed-to-checkout" className="btn1">Confirm Booking <i className="fa-solid fa-arrow-right"></i></Link>
                                             </div>
                                         </form>
 
@@ -248,7 +302,7 @@ const GetAddress = () => {
                 </div>
             </section>
 
-            
+
         </>
     );
 }
