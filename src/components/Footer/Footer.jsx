@@ -25,11 +25,11 @@ const Footer = () => {
               </ul>
             </div>
             <div className="col-md-3">
-              <h4>Tests</h4>
+              <h4>Policies</h4>
               <ul>
-                <li><Link>MENOPAUSAL DIAGNOSTIC PANEL</Link></li>
-                <li><Link>HIRSUTISM SCREENING PANEL</Link></li>
-                <li><Link>HIRSUTISM EVALUATION PANEL</Link></li>
+                <li><Link to={`/privay-policy`} >Privacy policy</Link></li>
+                <li><Link to={`/refund-cancellation-policy`} >Refund And Cancellation</Link></li>
+                <li><Link to={`/terms-condition`} >Terms & Condition</Link></li>
               </ul>
             </div>
 

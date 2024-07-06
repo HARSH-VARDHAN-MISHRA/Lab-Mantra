@@ -24,6 +24,9 @@ import OrderSummary from './pages/CheckoutPage/GetAddress';
 import BookingForm from './pages/CheckoutPage/BookingForm';
 import LabsLocations from './pages/Labs/LabsLocations';
 import BookingConfirm from './pages/CheckoutPage/BookingConfirm';
+import TermsCondition from './pages/PolicyPages/TermsCondition';
+import RefundCancelation from './pages/PolicyPages/RefundCancelation';
+import PrivacyPolicy from './pages/PolicyPages/PrivacyPolicy';
 
 
 function App() {
@@ -67,6 +70,10 @@ function App() {
 
             <Route path='/give-location' element={<LabsLocations />} />
 
+            {/* Policy Pages ==  */}
+            <Route path='/terms-condition' element={<TermsCondition />} />
+            <Route path='/refund-cancellation-policy' element={<RefundCancelation />} />
+            <Route path='/privay-policy' element={<PrivacyPolicy />} />
 
           </Routes>
         <Footer/>

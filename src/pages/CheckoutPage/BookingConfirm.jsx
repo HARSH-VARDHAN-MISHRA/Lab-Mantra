@@ -16,6 +16,10 @@ const BookingConfirm = () => {
     setBookingFormData(storedBookingFormData);
     setBookingId(storedBookingId);
     setConfirmationDateTime(storedConfirmationDateTime);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }, []);
 
   return (
