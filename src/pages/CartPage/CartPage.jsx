@@ -54,7 +54,7 @@ const CartPage = () => {
             totalToPay
         };
         localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
-        navigate('/proceed-to-book');
+        navigate('/cart/add-booking-details');
     }
 
     const token = localStorage.getItem('labMantraToken')

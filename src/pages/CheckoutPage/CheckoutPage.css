@@ -36,11 +36,52 @@
 }
 
 
-/* ------- get Address ---  */
+/* ------- Order Summary ---  */
+.booking-details strong{
+    font-weight: 500;
+    color: var(--color-blue);
+}
 
 
 
 
 
 
-
+/* =============== Booking Confirm =============  */
+.booking-confirm-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .confirmation-message {
+    margin-bottom: 20px;
+  }
+  
+  .confirmation-message h2 {
+    color: var(--bg-dark-blue);
+  }
+  
+  .confirmation-message p {
+    font-size: 18px;
+    color: var(--color-blue);
+  }
+  
+  .booking-details h3 {
+    color: var(--bg-dark-blue);
+    margin-bottom: 20px;
+  }
+  
+  .booking-details p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: var(--color-blue);
+  }
+  
+  .back-to-home {
+    margin-top: 20px;
+  }
+  

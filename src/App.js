@@ -17,10 +17,13 @@ import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 import PackageByTitlePage from './pages/PackagesPage/PackageByTitlePage';
 import CartPage from './pages/CartPage/CartPage';
 import SearchByTest from './pages/AllTest/SearchByTest';
-import GetAddress from './pages/CheckoutPage/GetAddress';
 
 import { ToastContainer, toast } from 'react-toastify';
 import OtpSignUp from './components/Login/OtpSignUp';
+import OrderSummary from './pages/CheckoutPage/GetAddress';
+import BookingForm from './pages/CheckoutPage/BookingForm';
+import LabsLocations from './pages/Labs/LabsLocations';
+import BookingConfirm from './pages/CheckoutPage/BookingConfirm';
 
 
 function App() {
@@ -53,12 +56,17 @@ function App() {
 
             {/* --- Route by package names -- */}
             <Route path='/cart' element={<CartPage />} />
-            <Route path='/proceed-to-book' element={<GetAddress />} />
+            <Route path='/cart/add-booking-details' element={<BookingForm />} />
+            <Route path='/cart/booking-summary' element={<OrderSummary />} />
+            <Route path='/booking-confirmed' element={<BookingConfirm />} />
 
 
             <Route path='/report-status' element={<UserReport />} />
             <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
             <Route path='/booking' element={<Booking />} />
+
+            <Route path='/give-location' element={<LabsLocations />} />
+
 
           </Routes>
         <Footer/>

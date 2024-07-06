@@ -19,7 +19,12 @@ const HomePage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [locationPopup, setLocationPopup] = useState(false);
-
+  const [lat, setLat] = useState()
+  const [long, setLong] = useState()
+  const [pincode, setPinCode] = useState()
+  const [testName, setTestName] = useState('');
+  const [testSuggestions, setTestSuggestions] = useState([]);
+  const [city, setCity] = useState(sessionStorage.getItem("city") || '');
   const fetchTest = async () => {
     try {
       const res = await axios.get("https://lab-mantra-backend.onrender.com/api/v1/get-all-test");
@@ -56,16 +61,29 @@ const HomePage = () => {
           console.log(response.data)
           console.log("Results From ", results);
 
+          for (const result of results) {
+            for (const component of result.address_components) {
+              if (component.types.includes("postal_code")) {
+                setPinCode(component.long_name);
+                break;
+              }
+            }
+
+          }
           // Save latitude and longitude to session storage
+          // console.log("lat",latitude)
           sessionStorage.setItem('latitude', latitude);
           sessionStorage.setItem('longitude', longitude);
+          setLat(latitude)
+          setLong(longitude)
+
 
           // Extract and save city to session storage
           let city = '';
           results[0].address_components.forEach((component) => {
-              if (component.types.includes('locality')) {
-                  city = component.long_name;
-              }
+            if (component.types.includes('locality')) {
+              city = component.long_name;
+            }
           });
           sessionStorage.setItem('city', city);
 
@@ -86,7 +104,7 @@ const HomePage = () => {
     );
   };
 
-  
+
 
   const handleAddToCart = (test) => {
     let updatedCart = [...cart];
@@ -111,9 +129,25 @@ const HomePage = () => {
     setLocationPopup(false);
     checkLocationAccess();
   };
+  const handleTestNameChange = (e) => {
+    const value = e.target.value;
+    setTestName(value);
+    console.log(tests)
+    // Filter tests for suggestions
+    const suggestions = tests.filter(test => test.testName && test.testName.toLowerCase().includes(value.toLowerCase()));
+    console.log("Suggestions", suggestions)
+    setTestSuggestions(suggestions);
+  };
 
+
+  const sendRequirementInQuery = (e) => {
+    e.preventDefault(); // Prevent the default form submission
+    window.location.href = `/Nearest-Lab?TestName=${testName.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
+  };
+  const defaultCities = ["Delhi", "Kolkata", "Chennai", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Kanpur", "Nagpur", "Visakhapatnam", "Bhopal", "Patna", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut", "Rajkot", "Kalyan-Dombivli", "Vasai-Virar", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad"];
   return (
     <>
+      {/* Searching Facilty by nearby */}
       <section className="locate">
         <div className="container">
           <div className="flex-loc">
@@ -121,28 +155,41 @@ const HomePage = () => {
               <h1>Find Top-Quality Labs <br /> Near You at <br /> <span>Affordable Prices!</span></h1>
             </div>
             <div className="flex-content">
-
-
-              <form >
+              <form onSubmit={sendRequirementInQuery}>
                 <div className="input-fd">
                   <i className="fa-solid fa-location-crosshairs"></i>
-                  <select name="" >
-                    <option value="">{sessionStorage.getItem("city")}</option>
-                    <option value="">Delhi</option>
-                    <option value="">Kolkata</option>
-                    <option value="">Chennai</option>
-                    <option value="">......</option>
-                    <option value="">......</option>
-                    <option value="">......</option>
+                  <select name="" value={city} onChange={(e) => setCity(e.target.value)}>
+                    <option value="">{city || "Select City"}</option>
+                    {defaultCities.map((cityOption, index) => (
+                      <option key={index} value={cityOption}>{cityOption}</option>
+                    ))}
                   </select>
                 </div>
-                <div className="input-fd">
-                  <i className="fa-brands fa-searchengin"></i>
-                  <input type="text" placeholder="Add Multiple Test to find labs" />
-                </div>
+                <div className="input-fd mb-3 position-relative">
+  <i className="fa-brands fa-searchengin"></i>
+  <input
+    type="text"
+    className="form-control"
+    value={testName}
+    onChange={handleTestNameChange}
+    placeholder="Add Multiple Test to find labs"
+  />
+  {testSuggestions.length > 0 && (
+    <div className="suggestions-wrapper">
+      <select className="form-select" onChange={(e) => setTestName(e.target.value)} size={testSuggestions.length + 1}>
+        <option value="">Select a suggestion</option>
+        {testSuggestions.map((suggestion, index) => (
+          <option key={index} value={suggestion.testName}>
+            {suggestion.testName}
+          </option>
+        ))}
+      </select>
+    </div>
+  )}
+</div>
+
                 <button type="submit">Find Nearest Location</button>
               </form>
-
             </div>
           </div>
         </div>
