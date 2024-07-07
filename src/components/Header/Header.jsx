@@ -102,14 +102,14 @@ const Header = () => {
                         <img src={logo} alt="logo" />
                     </Link>
                 </div>
-                <div className={`links ${toogleMenu ? 'active' : ''}`}>
+                <div className={`links `}>
                     <ul>
-                        <li><Link onClick={handleCloseMenu} to="/">Home</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/about-us">About Us</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/lab-tests">Book Test</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/our-packages">Our Packages</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/report-status">Check Report</Link></li>
-                        <li><Link onClick={handleCloseMenu} to="/contact-us">Contact Us</Link></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/about-us">About Us</Link></li>
+                        <li><Link to="/lab-tests">Book Test</Link></li>
+                        <li><Link to="/our-packages">Our Packages</Link></li>
+                        <li><Link to="/report-status">Check Report</Link></li>
+                        <li><Link to="/contact-us">Contact Us</Link></li>
                         <div className="closeToggleMenu" onClick={handleCloseMenu}>
                             <i className="fa-solid fa-xmark"></i>
                         </div>
@@ -140,6 +140,58 @@ const Header = () => {
 
             </nav>
         </header>
+
+        <section className={`side-navbar ${toogleMenu ? 'active' : ''}`}>
+            <div className="inside">
+                <div className="upper">
+                    <div className="flex mb-2">
+                        <div >
+                            
+                        </div>
+                        <div className="close" onClick={handleCloseMenu}>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+
+                    </div>
+                    <div className="nav-link">
+                        <ul>
+                            <li><Link onClick={handleCloseMenu} to="/">Home</Link></li>
+                            <li><Link onClick={handleCloseMenu} to="/lab-tests">Book Test</Link></li>
+                            <li><Link onClick={handleCloseMenu} to="/our-packages">Our Packages</Link></li>
+                            <li><Link onClick={handleCloseMenu} to="/report-status">Check Report</Link></li>
+                            <li><Link onClick={handleCloseMenu} to="/about-us">About Us</Link></li>
+                            <li><Link onClick={handleCloseMenu} to="/contact-us">Contact Us</Link></li>
+                        </ul>
+                    </div>
+                    
+                    <div className="circle-icon flex">
+                        <Link to="/cart" className="cart" onClick={handleCloseMenu} >
+                            <i className="fa-solid fa-cart-plus"></i>
+                        </Link>
+                        <Link to={'/'} onClick={handleCloseMenu}>
+                            <i class="fa-solid fa-house"></i>
+                        </Link>
+                    </div>
+                </div>
+                {token ? (
+                    <div className="lower">
+                        <div className="links">
+                            <h5 className='text-center'>Welcome, {user.name}!</h5>
+                            <Link to={`/profile`} className='w-100 d-block ' onClick={handleCloseMenu}>View Profile</Link>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="lower">
+                        <p className='text-center text-danger' > Please Login or Register to access personalized lab services.</p>
+                        <div className="links flex">
+                            <Link to={`/login`} onClick={handleCloseMenu}>LOGIN</Link>
+                            <Link to={`/sign-in`} onClick={handleCloseMenu}>SIGN IN</Link>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+        </section>
 
 
         {/*  ----------Whatsapp---------- */}
