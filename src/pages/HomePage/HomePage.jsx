@@ -145,6 +145,7 @@ const HomePage = () => {
     window.location.href = `/Nearest-Lab?TestName=${testName.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
   };
   const defaultCities = ["Delhi", "Kolkata", "Chennai", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Kanpur", "Nagpur", "Visakhapatnam", "Bhopal", "Patna", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut", "Rajkot", "Kalyan-Dombivli", "Vasai-Virar", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad"];
+
   return (
     <>
       {/* Searching Facilty by nearby */}
@@ -166,27 +167,26 @@ const HomePage = () => {
                   </select>
                 </div>
                 <div className="input-fd mb-3 position-relative">
-  <i className="fa-brands fa-searchengin"></i>
-  <input
-    type="text"
-    className="form-control"
-    value={testName}
-    onChange={handleTestNameChange}
-    placeholder="Add Multiple Test to find labs"
-  />
-  {testSuggestions.length > 0 && (
-    <div className="suggestions-wrapper">
-      <select className="form-select" onChange={(e) => setTestName(e.target.value)} size={testSuggestions.length + 1}>
-        <option value="">Select a suggestion</option>
-        {testSuggestions.map((suggestion, index) => (
-          <option key={index} value={suggestion.testName}>
-            {suggestion.testName}
-          </option>
-        ))}
-      </select>
-    </div>
-  )}
-</div>
+                  <i className="fa-brands fa-searchengin"></i>
+                  <input
+                    type="text"
+                    value={testName}
+                    onChange={handleTestNameChange}
+                    placeholder="Add Multiple Test to find labs"
+                  />
+                  {testSuggestions.length > 0 && (
+                    <div className="suggestions-wrapper">
+                      <select onChange={(e) => setTestName(e.target.value)} size={testSuggestions.length + 1}>
+                        <option value="">Select a Test</option>
+                        {testSuggestions.map((suggestion, index) => (
+                          <option key={index} value={suggestion.testName}>
+                            {suggestion.testName}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
 
                 <button type="submit">Find Nearest Location</button>
               </form>

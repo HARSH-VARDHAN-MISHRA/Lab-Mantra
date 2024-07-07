@@ -21,16 +21,12 @@
   .suggestions-wrapper {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
+    width: 100%;
     z-index: 1000;
+    max-height: 150px;
+    overflow-y: auto;
   }
   
-  .suggestions-wrapper select {
-    width: 100%;
-    border-top: 0;
-    border-radius: 0 0 0.375rem 0.375rem; /* Matches Bootstrap form control radius */
-  }
   
 .all-sec .grid-2 .sin-sec .secImg svg{
     height: 7rem;
