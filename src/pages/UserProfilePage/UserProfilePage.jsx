@@ -14,6 +14,11 @@ const UserProfilePage = () => {
         if (user) {
             setUserData(user);
         }
+
+        window.scrollTo({
+            top:0,
+            behavior:'smooth'
+        })
     }, []); // Empty dependency array ensures this runs only once on component mount
 
     const handleTabChange = (tab) => {
