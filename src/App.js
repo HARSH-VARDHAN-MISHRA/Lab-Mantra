@@ -40,7 +40,6 @@ function App() {
             <Route path='/about-us' element={<AboutPage />} />
             <Route path='/contact-us' element={<ContactPage />} />
 
-
             <Route path='/lab-tests' element={<AllTest />} />
             <Route path='/lab-tests/:testname' element={<SearchByTest />} />
 

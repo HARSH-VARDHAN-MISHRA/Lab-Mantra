@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './CheckoutPage.css'
 import '../Booking/Booking.css'
-
+import axios from 'axios'
 const OrderSummary = () => {
     const navigate = useNavigate()
     const [cartDetails, setCartDetails] = useState({});
     const [bookingFormData, setBookingFormData] = useState({});
-
+    const [paymentOption, setPaymentOption] = useState('cashOnDelivery');
     useEffect(() => {
         const storedDetails = JSON.parse(localStorage.getItem('cartDetails')) || {};
         setCartDetails(storedDetails);
@@ -27,17 +27,60 @@ const OrderSummary = () => {
 
     // ============================================= 
     const [visibleTests, setVisibleTests] = useState({});
+    const checkoutHandler = async (e) => {
+        e.preventDefault();
+        
+        if (paymentOption === 'payOnline') {
+            try {
+                const { data: { order } } = await axios.post("http://localhost:6842/api/v1/Create-payment", {
+                    amount: totalToPay,
+                    OrderDetails: {
+                        TestInfos: bookingFormData,
+                        CartData: cartDetails
+                    }
+                });
 
+                const options = {
+                    key: "rzp_test_285YiZKcRm3PyP",
+                    amount: order.totalToPay || 100,
+                    currency: "INR",
+                    name: "Lab Mantra",
+                    description: "Payment Of Products",
+                    image: "https://i.ibb.co/nQw5cNf/logo.png",
+                    order_id: order.id,
+                    callback_url: "http://localhost:6842/api/v1/paymentverification",
+                    notes: {
+                        "address": "Labmantra Pvt Ltd"
+                    },
+                    theme: {
+                        "color": "#2dbcb6"
+                    }
+                };
+
+                const razor = new window.Razorpay(options);
+                razor.open();
+            } catch (error) {
+                console.error('Error in creating order:', error);
+                // Handle error scenario
+            }
+        } else if (paymentOption === 'cashOnDelivery') {
+            // Handle cash on delivery scenario
+            const queryString = Object.keys(bookingFormData)
+            .map(key => {
+                const encodedValue = encodeURIComponent(bookingFormData[key]).replace(/%/g, '-');
+                return `${key}=${encodedValue}`;
+            })
+            .join('&');
+                navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
+        }
+        
+    };
     const toggleVisibility = (packageId) => {
         setVisibleTests(prevState => ({
             ...prevState,
             [packageId]: !prevState[packageId]
         }));
     };
-
-    const confirmBooking = () =>{
-        navigate('/booking-confirmed')
-    }
 
     return (
         <>
@@ -198,15 +241,20 @@ const OrderSummary = () => {
                                 {/* Payment Option */}
                                 <div className="mt-4">
                                     <label htmlFor="paymentOption" className="form-label" style={{ color: 'var(--bg-dark-blue)' }}>Payment Option:</label>
-                                    <select id="paymentOption" className="form-select" style={{ border: '1px solid var(--color-blue)', borderRadius: '4px' }}>
+                                    <select
+                                        id="paymentOption"
+                                        className="form-select"
+                                        value={paymentOption}
+                                        onChange={(e) => setPaymentOption(e.target.value)}
+                                    >
                                         <option value="cashOnDelivery">Cash on Delivery</option>
-                                        <option value="payOnline" disabled>Pay Online</option>
+                                        <option value="payOnline">Pay Online</option>
                                     </select>
                                 </div>
 
                                 {/* Confirm Booking Button */}
                                 <div className="mt-4 d-grid">
-                                    <button className="btn btn-success" onClick={confirmBooking} style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '10px 0', borderRadius: '4px' }}>
+                                    <button onClick={checkoutHandler} className="btn btn-success" style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '10px 0', borderRadius: '4px' }}>
                                         Confirm Booking
                                     </button>
                                 </div>

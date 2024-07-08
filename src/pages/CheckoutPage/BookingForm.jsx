@@ -1,10 +1,11 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './BookingForm.css';
+import axios from 'axios';
 
 const BookingForm = () => {
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     const [bookingType, setBookingType] = useState('homeCollection');
     const [formData, setFormData] = useState({
         fullName: '',
@@ -22,6 +23,9 @@ const BookingForm = () => {
         appointTime: '',
         bookingType: 'homeCollection' // To track the current booking type
     });
+    const [labDetails, setLabDetails] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const generateTimeOptions = () => {
         const times = [];
@@ -38,26 +42,87 @@ const BookingForm = () => {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData({
-            ...formData,
+        setFormData((prevFormData) => ({
+            ...prevFormData,
             [id]: value
-        });
+        }));
+
+        if (id === 'city' || id === 'pinCode') {
+            const city = id === 'city' ? value : formData.city;
+            const pinCode = id === 'pinCode' ? value : formData.pinCode;
+            if (city && pinCode) {
+                fetchLabDetailsByCityAndPincode(pinCode, city);
+            }
+        }
+
+        if (id === 'labName') {
+            const selectedLab = labDetails.find(lab => lab.LabName === value);
+            if (selectedLab) {
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    labAddress: selectedLab.address
+                }));
+            }
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Save formData to session storage
         sessionStorage.setItem('bookingFormData', JSON.stringify(formData));
-
-        navigate('/cart/booking-summary')
+        navigate('/cart/booking-summary');
     };
 
-    useEffect(()=>{
-        window.scrollTo({
-            top:0,
-            behavior:'smooth'
-        })
-    },[])
+    useEffect(() => {
+        // Scroll to top on component mount if needed
+        // window.scrollTo({
+        //     top: 0,
+        //     behavior: 'smooth'
+        // });
+    }, []);
+
+    const stateNames = [
+        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa",
+        "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
+        "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
+        "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Delhi",
+        "Puducherry", "Ladakh", "Jammu and Kashmir"
+    ];
+
+    const statesOptions = stateNames.map((state, index) => (
+        <option key={index} value={state}>{state}</option>
+    ));
+
+    const fetchLabDetailsByCityAndPincode = async (pinCode, city) => {
+        setLoading(true);
+        try {
+            const response = await axios.get(`http://localhost:6842/api/v1/lab-info-by-pincode?pinCode=${pinCode}&city=${city}`);
+            setLabDetails(response.data);
+            setError('');
+        } catch (error) {
+            console.log(error);
+            setError('Failed to fetch labs. Please try again later.');
+            setLabDetails([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const renderLabOptions = () => {
+        if (loading) {
+            return <option>Loading labs...</option>;
+        }
+        if (error) {
+            return <option>{error}</option>;
+        }
+        if (labDetails.length === 0) {
+            return <option>No labs available in this area.</option>;
+        }
+        return labDetails.map((lab, index) => (
+            <option key={index} value={lab.name}>{lab.LabName}</option>
+        ));
+    };
 
     return (
         <>
@@ -108,7 +173,7 @@ const BookingForm = () => {
                                     <div className="row g-3">
                                         <h4>Personal Details</h4>
                                         <div className="col-md-6">
-                                            <label htmlFor="fullName">Full Name:</label>
+                                            <label htmlFor="fullName">Full Name: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="text"
                                                 id="fullName"
@@ -119,7 +184,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="phone">Phone Number:</label>
+                                            <label htmlFor="phone">Phone Number: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="tel"
                                                 id="phone"
@@ -150,7 +215,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="date">Preferred Date:</label>
+                                            <label htmlFor="date">Preferred Date: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="date"
                                                 id="date"
@@ -161,7 +226,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="age">Age:</label>
+                                            <label htmlFor="age">Age: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="number"
                                                 id="age"
@@ -172,7 +237,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="gender">Gender:</label>
+                                            <label htmlFor="gender">Gender:<span className='text-danger'>*</span></label>
                                             <select
                                                 id="gender"
                                                 className="form-control"
@@ -187,18 +252,7 @@ const BookingForm = () => {
                                             </select>
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="pinCode">Pin Code:</label>
-                                            <input
-                                                type="number"
-                                                id="pinCode"
-                                                className="form-control"
-                                                value={formData.pinCode}
-                                                onChange={handleChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="city">City:</label>
+                                            <label htmlFor="city">City:<span className='text-danger'>*</span></label>
                                             <select
                                                 id="city"
                                                 className="form-control"
@@ -207,14 +261,22 @@ const BookingForm = () => {
                                                 required
                                             >
                                                 <option value="">Select City</option>
-                                                <option value="Mumbai">Mumbai</option>
-                                                <option value="Delhi">Delhi</option>
-                                                <option value="Bangalore">Bangalore</option>
-                                                {/* Add more cities here */}
+                                                {statesOptions}
                                             </select>
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="address">Address:</label>
+                                            <label htmlFor="pinCode">Pincode:<span className='text-danger'>*</span></label>
+                                            <input
+                                                type="text"
+                                                id="pinCode"
+                                                className="form-control"
+                                                value={formData.pinCode}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="address">Address:<span className='text-danger'>*</span></label>
                                             <input
                                                 type="text"
                                                 id="address"
@@ -224,33 +286,48 @@ const BookingForm = () => {
                                                 required
                                             />
                                         </div>
-                                        <h4>Laboratory Details</h4>
-                                        <div className="col-md-12">
-                                            <label htmlFor="labName">Laboratory Name:</label>
-                                            <input
-                                                type="text"
+                                        <hr />
+                                        <div className="col-md-6">
+                                            <label htmlFor="labName">Lab Name:<span className='text-danger'>*</span></label>
+                                            <select
                                                 id="labName"
                                                 className="form-control"
                                                 value={formData.labName}
                                                 onChange={handleChange}
                                                 required
-                                            />
+                                            >
+                                                <option value="">Select Lab</option>
+                                                {renderLabOptions()}
+                                            </select>
                                         </div>
-                                        <div className="col-md-12">
-                                            <label htmlFor="labAddress">Laboratory Information:</label>
+                                        <div className="col-md-6">
+                                            <label htmlFor="labAddress">Lab Address:</label>
                                             <textarea
                                                 id="labAddress"
                                                 className="form-control"
-                                                rows="3"
                                                 value={formData.labAddress}
-                                                onChange={handleChange}
-                                                required
-                                            ></textarea>
+                                                readOnly
+                                            />
                                         </div>
-                                        <div className="col-md-12">
-                                            <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                                        <div className="col-md-6">
+                                            <label htmlFor="appointTime">Preferred Time:</label>
+                                            <select
+                                                id="appointTime"
+                                                className="form-control"
+                                                value={formData.appointTime}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Select Time</option>
+                                                {generateTimeOptions().map((time, index) => (
+                                                    <option key={index} value={time}>{time}</option>
+                                                ))}
+                                            </select>
                                         </div>
                                     </div>
+
+                                    <button type="submit" className="btn btn-primary mt-3">
+                                        Add Details
+                                    </button>
                                 </form>
                             )}
 
@@ -260,7 +337,7 @@ const BookingForm = () => {
                                     <div className="row g-3">
                                         <h4>Personal Details</h4>
                                         <div className="col-md-6">
-                                            <label htmlFor="fullName">Full Name:</label>
+                                            <label htmlFor="fullName">Full Name: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="text"
                                                 id="fullName"
@@ -271,7 +348,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="phone">Phone Number:</label>
+                                            <label htmlFor="phone">Phone Number: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="tel"
                                                 id="phone"
@@ -302,7 +379,18 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="age">Age:</label>
+                                            <label htmlFor="date">Preferred Date: <span className='text-danger'>*</span></label>
+                                            <input
+                                                type="date"
+                                                id="date"
+                                                className="form-control"
+                                                value={formData.date}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="age">Age: <span className='text-danger'>*</span></label>
                                             <input
                                                 type="number"
                                                 id="age"
@@ -313,7 +401,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="gender">Gender:</label>
+                                            <label htmlFor="gender">Gender:<span className='text-danger'>*</span></label>
                                             <select
                                                 id="gender"
                                                 className="form-control"
@@ -328,9 +416,22 @@ const BookingForm = () => {
                                             </select>
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="pinCode">Pin Code:</label>
+                                            <label htmlFor="city">City:<span className='text-danger'>*</span></label>
+                                            <select
+                                                id="city"
+                                                className="form-control"
+                                                value={formData.city}
+                                                onChange={handleChange}
+                                                required
+                                            >
+                                                <option value="">Select City</option>
+                                                {statesOptions}
+                                            </select>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="pinCode">Pincode:<span className='text-danger'>*</span></label>
                                             <input
-                                                type="number"
+                                                type="text"
                                                 id="pinCode"
                                                 className="form-control"
                                                 value={formData.pinCode}
@@ -339,58 +440,34 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="city">City:</label>
-                                            <input
-                                                type="text"
-                                                id="city"
-                                                className="form-control"
-                                                value={formData.city}
-                                                onChange={handleChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="address">Address:</label>
-                                            <input
-                                                type="text"
-                                                id="address"
-                                                className="form-control"
-                                                value={formData.address}
-                                                onChange={handleChange}
-                                                required
-                                            />
-                                        </div>
-                                        <h4>Laboratory Details</h4>
-                                        <div className="col-md-12">
-                                            <label htmlFor="labName">Laboratory Name:</label>
-                                            <input
-                                                type="text"
+                                            <label htmlFor="labName">Lab Name:<span className='text-danger'>*</span></label>
+                                            <select
                                                 id="labName"
                                                 className="form-control"
                                                 value={formData.labName}
                                                 onChange={handleChange}
                                                 required
-                                            />
+                                            >
+                                                <option value="">Select Lab</option>
+                                                {renderLabOptions()}
+                                            </select>
                                         </div>
-                                        <div className="col-md-12">
-                                            <label htmlFor="labAddress">Laboratory Information:</label>
+                                        <div className="col-md-6">
+                                            <label htmlFor="labAddress">Lab Address:</label>
                                             <textarea
                                                 id="labAddress"
                                                 className="form-control"
-                                                rows="3"
                                                 value={formData.labAddress}
-                                                onChange={handleChange}
-                                                required
-                                            ></textarea>
+                                                readOnly
+                                            />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="appointTime">Appointment Timing:</label>
+                                            <label htmlFor="appointTime">Preferred Time:</label>
                                             <select
                                                 id="appointTime"
                                                 className="form-control"
                                                 value={formData.appointTime}
                                                 onChange={handleChange}
-                                                required
                                             >
                                                 <option value="">Select Time</option>
                                                 {generateTimeOptions().map((time, index) => (
@@ -398,21 +475,11 @@ const BookingForm = () => {
                                                 ))}
                                             </select>
                                         </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="date">Preferred Date:</label>
-                                            <input
-                                                type="date"
-                                                id="date"
-                                                className="form-control"
-                                                value={formData.date}
-                                                onChange={handleChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="col-md-12">
-                                            <button type="submit" className="btn btn-primary mt-3">Submit</button>
-                                        </div>
                                     </div>
+
+                                    <button type="submit" className="btn btn-primary mt-3">
+                                        Add Details
+                                    </button>
                                 </form>
                             )}
                         </div>
@@ -421,6 +488,6 @@ const BookingForm = () => {
             </section>
         </>
     );
-}
+};
 
 export default BookingForm;
