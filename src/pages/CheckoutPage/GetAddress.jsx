@@ -29,17 +29,24 @@ const OrderSummary = () => {
     const [visibleTests, setVisibleTests] = useState({});
     const checkoutHandler = async (e) => {
         e.preventDefault();
-        
+        const token = localStorage.getItem('labMantraToken');
+    
         if (paymentOption === 'payOnline') {
             try {
-                const { data: { order } } = await axios.post("http://localhost:6842/api/v1/Create-payment", {
+                const { data: { order } } = await axios.post("http://localhost:6842/api/v1/Create-payment", 
+                {
                     amount: totalToPay,
                     OrderDetails: {
                         TestInfos: bookingFormData,
                         CartData: cartDetails
                     }
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 });
-
+    
                 const options = {
                     key: "rzp_test_285YiZKcRm3PyP",
                     amount: order.totalToPay || 100,
@@ -56,7 +63,7 @@ const OrderSummary = () => {
                         "color": "#2dbcb6"
                     }
                 };
-
+    
                 const razor = new window.Razorpay(options);
                 razor.open();
             } catch (error) {
@@ -66,15 +73,16 @@ const OrderSummary = () => {
         } else if (paymentOption === 'cashOnDelivery') {
             // Handle cash on delivery scenario
             const queryString = Object.keys(bookingFormData)
-            .map(key => {
-                const encodedValue = encodeURIComponent(bookingFormData[key]).replace(/%/g, '-');
-                return `${key}=${encodedValue}`;
-            })
-            .join('&');
-                navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
+                .map(key => {
+                    const encodedValue = encodeURIComponent(bookingFormData[key]);
+                    return `${key}=${encodedValue}`;
+                })
+                .join('&');
+    
+            navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
         }
-        
     };
+    
     const toggleVisibility = (packageId) => {
         setVisibleTests(prevState => ({
             ...prevState,
