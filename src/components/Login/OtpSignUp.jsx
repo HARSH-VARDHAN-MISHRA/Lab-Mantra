@@ -117,7 +117,7 @@ const OtpSignUp = () => {
                             <div className="form">
                                 <form onSubmit={handleOtpSubmit}>
                                     <div className="input-field">
-                                        <i class="fa-solid fa-unlock-keyhole"></i>
+                                        <i className="fa-solid fa-unlock-keyhole"></i>
                                         <input required type="number" name="otp" value={formData.otp} onChange={handleChange} placeholder='Enter OTP' />
                                     </div>
 
@@ -126,7 +126,7 @@ const OtpSignUp = () => {
                                     )}
 
                                     <div className="">
-                                        <Link onClick={handleResendOtpSubmit}><i class="fa-solid fa-arrow-rotate-left"></i>Resend OTP</Link>
+                                        <Link onClick={handleResendOtpSubmit}><i className="fa-solid fa-arrow-rotate-left"></i>Resend OTP</Link>
                                         
                                     </div>
 

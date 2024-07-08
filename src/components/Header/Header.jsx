@@ -149,7 +149,7 @@ const Header = () => {
                             
                         </div>
                         <div className="close" onClick={handleCloseMenu}>
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </div>
 
                     </div>
@@ -169,7 +169,7 @@ const Header = () => {
                             <i className="fa-solid fa-cart-plus"></i>
                         </Link>
                         <Link to={'/'} onClick={handleCloseMenu}>
-                            <i class="fa-solid fa-house"></i>
+                            <i className="fa-solid fa-house"></i>
                         </Link>
                     </div>
                 </div>

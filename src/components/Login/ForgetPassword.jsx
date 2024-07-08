@@ -144,7 +144,7 @@ const ForgetPassword = () => {
                                         
                                             <div className="flex width-80">
                                                 <div className="keep">
-                                                    <Link onClick={resendOTP}><i class="fa-solid fa-arrow-rotate-right"></i> Resend OTP</Link>
+                                                    <Link onClick={resendOTP}><i className="fa-solid fa-arrow-rotate-right"></i> Resend OTP</Link>
                                                 </div>
                                                 <div className="member">
 
