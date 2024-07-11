@@ -78,7 +78,7 @@ function App() {
             <Route path='/refund-cancellation-policy' element={<RefundCancelation />} />
             <Route path='/privay-policy' element={<PrivacyPolicy />} />
 
-            <Route path='/*' element={<ErrorPage />} />
+            {/* <Route path='/*' element={<ErrorPage />} /> */}
           </Routes>
         <Footer/>
         

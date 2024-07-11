@@ -66,7 +66,7 @@ const SearchByTest = () => {
                         <section className="bread">
                             <div className="container">
                                 <nav aria-label="breadcrumb ">
-                                    <h2>Lab Tests</h2>
+                                    <h2>Search by {testDetails.testName}</h2>
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Home</Link></li>
                                         <li className="breadcrumb-item" aria-current="page"><Link to="/lab-tests">Lab Tests</Link></li>
@@ -79,6 +79,9 @@ const SearchByTest = () => {
                         <section className="tes my-5">
                             <div className="container">
                                 <div className="row">
+                                    <div className="col-md-12">
+                                        <h3>{testDetails.testName} Test cost in <span style={{color:'var(--bg-dark-blue)'}}>Delhi</span></h3>
+                                    </div>
                                     <div className="col-md-6">
 
                                         <div className="single-test">

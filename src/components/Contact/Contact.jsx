@@ -1,53 +1,97 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Contact.css'
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+
 const Contact = () => {
+
+    const [loading,setLoading] = useState(false);
+    const [sended,setSended] = useState(false);
+    const [formData,setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        email_id: '',
+        address: ''
+    })
+
+    const handleChange = (e) =>{
+        const {name,value} = e.target;
+        setFormData({
+            ...formData,
+            [name]:value
+        })
+    }
+
+    const handleSubmit = async (event)=>{
+        setLoading(true);
+        event.preventDefault();
+        try {
+            const res = await axios.post("https://lab-mantra-backend.onrender.com/api/v1/apply-enquiry",formData);
+            toast.success(res.data.message);
+            setFormData({
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                email_id: '',
+                address: ''
+            })
+            setSended(true);
+        } catch (error) {
+            console.error("Error while Submit the Form",error);
+            toast.success(error.res)
+        }finally{
+            setLoading(false);
+        }
+    }
+
     return (
         <>
+
             <section className="contact">
                 <div className="container">
                     <div className="row">
-                        {/* <div className="col-12 text-center">
-                            <h4>Contact Us</h4>
-                            <p>For any issues related to service or sample collection please reach us here.</p>
-
-                        </div> */}
                         <div className="col-12">
-                            <div className="row">
+                            <form className="row" onSubmit={handleSubmit}>
+                                {sended ? (
+                                    <div className="col-md-12 row">
+                                        <div className="col-md-6 mx-auto">
+                                            <div class="alert alert-info" role="alert">
+                                                Inquiry Send Successfully !!
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    ) 
+                                    : ""
+                                }
                                 <div className="col-md-6 mb-3">
-                                    {/* <label for="form1" className="form-label">First Name</label> */}
-                                    <input type="text" className="form-control" required id="form1" placeholder="First Name" />
+                                    <input type="text" name='firstName' value={formData.firstName} onChange={handleChange} className="form-control" required id="form1" placeholder="First Name" />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    {/* <label for="form2" className="form-label">Last Name</label> */}
-                                    <input type="text" className="form-control" required id="form2" placeholder="Last Name" />
+                                    <input type="text" name='lastName' value={formData.lastName} onChange={handleChange} className="form-control" required id="form2" placeholder="Last Name" />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    {/* <label for="form3" className="form-label">Phone Number</label> */}
-                                    <input type="number" className="form-control" required id="form3" placeholder="Phone Number" />
+                                    <input type="number" name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} className="form-control" required id="form3" placeholder="Phone Number" />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    {/* <label for="form4" className="form-label">Email Id</label> */}
-                                    <input type="email" className="form-control" required id="form4" placeholder="Email Id" />
+                                    <input type="email" name='email_id' value={formData.email_id} onChange={handleChange} className="form-control" required id="form4" placeholder="Email Id" />
                                 </div>
                                 <div className="col-12 mb-3">
-                                    {/* <label for="exampleFormControlTextarea1" className="form-label">Address</label> */}
-                                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Address"></textarea>
+                                    <textarea name='address' value={formData.address} onChange={handleChange} className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Address"></textarea>
                                 </div>
 
                                 <div className="col-12 text-center">
-                                    <button type="submit" className="form-control">Send Message</button>
+                                    <button type="submit" className="form-control">{loading ? "Please Wait" : "Send Message"}</button>
                                 </div>
 
-                            </div>
+                            </form>
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="col-12">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.623489114058!2d77.0861790749604!3d28.730796079612652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07440faeeedd%3A0x7fd3b4b030819bdf!2sDigi%20India%20Solutions!5e0!3m2!1sen!2sin!4v1716030464228!5m2!1sen!2sin"  allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
         </>
