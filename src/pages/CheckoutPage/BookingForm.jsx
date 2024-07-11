@@ -68,16 +68,16 @@ const BookingForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(e);
         sessionStorage.setItem('bookingFormData', JSON.stringify(formData));
         navigate('/cart/booking-summary');
     };
 
     useEffect(() => {
-        // Scroll to top on component mount if needed
-        // window.scrollTo({
-        //     top: 0,
-        //     behavior: 'smooth'
-        // });
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }, []);
 
     const stateNames = [
@@ -97,7 +97,7 @@ const BookingForm = () => {
     const fetchLabDetailsByCityAndPincode = async (pinCode, city) => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:6842/api/v1/lab-info-by-pincode?pinCode=${pinCode}&city=${city}`);
+            const response = await axios.get(`https://lab-mantra-backend.onrender.com/api/v1/lab-info-by-pincode?pinCode=${pinCode}&city=${city}`);
             setLabDetails(response.data);
             setError('');
         } catch (error) {

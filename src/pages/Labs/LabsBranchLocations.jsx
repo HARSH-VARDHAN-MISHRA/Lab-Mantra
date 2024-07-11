@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-const LabsLocations = () => {
+const LabsBranchLocations = () => {
     const [location, setLocation] = useState({ lat: 28.7041, lng: 77.1025 }); // Default to Delhi coordinates
     const [error, setError] = useState(null);
     const [address, setAddress] = useState('');
@@ -103,7 +103,7 @@ const LabsLocations = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://lab-mantra-backend.onrender.com/api/v1/lab-address-update', {
+            const response = await axios.post('https://lab-mantra-backend.onrender.com/api/v1/branch-lab-address-update', {
                 address,
                 pincode,
                 city,
@@ -114,6 +114,7 @@ const LabsLocations = () => {
             });
 
             console.log('Response:', response.data);
+            // window.location.href=`/Labs-location-Updated?LabId=${labId}&Address=${address.replace(/\s+/g, '-')}`
             window.location.href=`/`
         } catch (error) {
             console.error('Error:', error.message);
@@ -193,4 +194,4 @@ const LabsLocations = () => {
     );
 };
 
-export default LabsLocations;
+export default LabsBranchLocations;

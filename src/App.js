@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage/HomePage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -27,12 +27,15 @@ import BookingConfirm from './pages/CheckoutPage/BookingConfirm';
 import TermsCondition from './pages/PolicyPages/TermsCondition';
 import RefundCancelation from './pages/PolicyPages/RefundCancelation';
 import PrivacyPolicy from './pages/PolicyPages/PrivacyPolicy';
+import LabsBranchLocations from './pages/Labs/LabsBranchLocations';
+
+import ErrorPage from './pages/Error/ErrorPage';
 
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+
         <Header/>
         <ToastContainer />
           <Routes>
@@ -68,15 +71,17 @@ function App() {
             <Route path='/booking' element={<Booking />} />
 
             <Route path='/give-location' element={<LabsLocations />} />
+            <Route path='/give-branch-location' element={<LabsBranchLocations />} />
 
             {/* Policy Pages ==  */}
             <Route path='/terms-condition' element={<TermsCondition />} />
             <Route path='/refund-cancellation-policy' element={<RefundCancelation />} />
             <Route path='/privay-policy' element={<PrivacyPolicy />} />
 
+            <Route path='/*' element={<ErrorPage />} />
           </Routes>
         <Footer/>
-      </BrowserRouter>
+        
     </>
   );
 }
