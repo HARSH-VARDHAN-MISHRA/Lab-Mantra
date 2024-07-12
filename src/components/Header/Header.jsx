@@ -60,6 +60,23 @@ const Header = () => {
     const cart = JSON.parse(localStorage.getItem('lab-cart')) || [];
     const cartLength = cart.length;
 
+    const handleScroll = () => {
+        const header = document.querySelector('header');
+        if (header) {
+            if (window.scrollY > 500) {
+                header.classList.add('fixed-header');
+            } else {
+                header.classList.remove('fixed-header');
+            }
+        }
+    };
+    
+    // Attach scroll event listener when component mounts
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
   return (
     <>
         <header>

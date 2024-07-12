@@ -1,6 +1,17 @@
 header {
     width: 100%;
+    position: relative;
+    transition: top 0.3s ease-in-out;
+    z-index: 1000;
 }
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    background: var(--bg-head);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example shadow */
+}
+
 
 header a {
     text-decoration: none;
