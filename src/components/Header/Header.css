@@ -5,12 +5,12 @@ header {
     z-index: 1000;
 }
 
-.fixed-header {
+/* header.fixed-header {
     position: fixed;
     top: 0;
-    background: var(--bg-head);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example shadow */
-}
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+} */
 
 
 header a {
