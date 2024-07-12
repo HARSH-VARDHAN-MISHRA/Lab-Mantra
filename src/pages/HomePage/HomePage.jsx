@@ -11,6 +11,7 @@ import Contact from '../../components/Contact/Contact';
 import About from '../../components/About/About';
 import Packages from '../../components/Packages/Packages';
 import axios from 'axios';
+import MetaTag from '../../components/Meta/MetaTag';
 
 const HomePage = () => {
   const [tests, setTests] = useState([]);
@@ -148,6 +149,13 @@ const HomePage = () => {
 
   return (
     <>
+      <MetaTag
+          title="Lab Mantra - Quality Healthcare for All Indian Citizens"
+          description="Welcome to Lab Mantra. Our initiative is to make quality healthcare affordable and accessible for all Indian citizens. Explore our diagnostic services and find out how we can assist you with your healthcare needs."
+          keyword="Lab Mantra, quality healthcare, affordable healthcare, diagnostic services, Indian healthcare"
+      />
+
+
       {/* Searching Facilty by nearby */}
       <section className="locate">
         <div className="container">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Booking.css'
 import { Link } from 'react-router-dom';
+import MetaTag from '../../components/Meta/MetaTag';
 
 const Booking = () => {
     const [activeTab, setActiveTab] = useState('home');
@@ -34,13 +35,19 @@ const Booking = () => {
 
     return (
         <>
+        <MetaTag
+            title="Your Cart - Lab Mantra"
+            description="Review and manage the items in your cart at Lab Mantra. Ensure you have all the necessary tests and services before proceeding to checkout."
+            keyword="Lab Mantra, cart, healthcare services, medical tests, checkout"
+        />
+
             <section className="bread">
                 <div className="container">
                 <nav aria-label="breadcrumb ">
                     <h2>Cart</h2>
-                    <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                    <li className="breadcrumb-item active" aria-current="page">Cart</li>
+                        <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">Cart</li>
                     </ol>
                 </nav>
                 </div>

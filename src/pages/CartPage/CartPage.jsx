@@ -4,6 +4,7 @@ import './CartPage.css';
 
 // import emptyCartImage from './emptyCart.png'
 import emptyCartImage from './emp.webp'
+import MetaTag from '../../components/Meta/MetaTag';
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
@@ -71,6 +72,12 @@ const CartPage = () => {
 
     return (
         <>
+        <MetaTag
+            title="Your Cart - Lab Mantra"
+            description="Review and manage the items in your cart at Lab Mantra. Ensure you have all the necessary tests and services before proceeding to checkout."
+            keyword="Lab Mantra, cart, healthcare services, medical tests, checkout"
+        />
+
 
             {cart.length ? (
                 <>

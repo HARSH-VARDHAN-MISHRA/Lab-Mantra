@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './UserProfilePage.css';
 import { toast } from 'react-toastify';
+import MetaTag from '../../components/Meta/MetaTag';
 
 
 const UserProfilePage = () => {
@@ -36,6 +37,11 @@ const UserProfilePage = () => {
 
     return (
         <>
+            <MetaTag
+                title="Your Profile - Lab Mantra"
+                description="View and manage your Lab Mantra user profile. Check your bookings, update personal information, and logout securely."
+                keyword="Lab Mantra, user profile, bookings, logout"
+            />
             <section className="bread" >
                 <div className="container">
                     <nav aria-label="breadcrumb">

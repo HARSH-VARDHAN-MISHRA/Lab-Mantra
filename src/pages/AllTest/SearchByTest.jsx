@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../../components/Loading/Loading';
+import MetaTag from '../../components/Meta/MetaTag';
 
 const SearchByTest = () => {
 
@@ -63,6 +64,12 @@ const SearchByTest = () => {
             {testDetails ?
                 (
                     <>
+                    <MetaTag
+                        title={`Search by ${testDetails.testName} - Lab Mantra`}
+                        description={`Find comprehensive information and diagnostic services for ${testDetails.testName} at Lab Mantra. Learn about the procedure, benefits, and how it can help in diagnosing various medical conditions.`}
+                        keyword={`Lab Mantra, ${testDetails.testName}, diagnostic test, healthcare, medical imaging, ${testDetails.testName} procedure`}
+                    />
+
                         <section className="bread">
                             <div className="container">
                                 <nav aria-label="breadcrumb ">

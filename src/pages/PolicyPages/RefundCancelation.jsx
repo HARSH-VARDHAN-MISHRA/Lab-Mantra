@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import MetaTag from '../../components/Meta/MetaTag';
 
 const RefundCancelation = () => {
     useEffect(() => {
@@ -10,6 +11,11 @@ const RefundCancelation = () => {
     }, [])
     return (
         <>
+            <MetaTag
+                title="Refund and Cancellation Policy - Lab Mantra"
+                description="Learn about Lab Mantra's refund and cancellation policy, including conditions for refunds, cancellation procedures, and refund methods."
+                keyword="Lab Mantra, refund policy, cancellation policy, refunds, cancellations"
+            />
             <section className="bread">
                 <div className="container">
                     <nav aria-label="breadcrumb ">

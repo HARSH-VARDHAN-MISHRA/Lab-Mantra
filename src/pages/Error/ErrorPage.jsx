@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import MetaTag from '../../components/Meta/MetaTag';
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -9,15 +10,23 @@ const ErrorPage = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <div className="text-center">
-        <h1 style={styles.heading}>404</h1>
-        <p style={styles.message}>Oops! The page you're looking for doesn't exist.</p>
-        <button style={styles.button} onClick={handleRedirect}>
-          Go to Home Page
-        </button>
+    <>
+      <MetaTag
+        title="Page Not Found - Lab Mantra"
+        description="Sorry, the page you are looking for does not exist. Please check the URL or go back to the homepage."
+        keyword="Lab Mantra, page not found, 404, error"
+    />
+
+      <div style={styles.container}>
+        <div className="text-center">
+          <h1 style={styles.heading}>404</h1>
+          <p style={styles.message}>Oops! The page you're looking for doesn't exist.</p>
+          <button style={styles.button} onClick={handleRedirect}>
+            Go to Home Page
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

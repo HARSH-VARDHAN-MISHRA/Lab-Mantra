@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../../components/Loading/Loading';
+import MetaTag from '../../components/Meta/MetaTag';
 
 const PackageByTitlePage = () => {
     const { packagename } = useParams(); // Retrieve the package name from the URL parameter
@@ -100,6 +101,11 @@ const PackageByTitlePage = () => {
     
     return (
         <>
+            <MetaTag
+                title={`${packagename} - Lab Mantra`}
+                description={`Explore the ${packagename} package offered by Lab Mantra. Comprehensive diagnostic services designed for your health needs.`}
+                keyword={`Lab Mantra, ${packagename}, healthcare packages, diagnostic services`}
+            />
             <section className="bread">
                 <div className="container">
                     <nav aria-label="breadcrumb ">

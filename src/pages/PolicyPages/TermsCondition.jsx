@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import MetaTag from '../../components/Meta/MetaTag';
 
 const TermsCondition = () => {
     useEffect(()=>{
@@ -10,6 +11,11 @@ const TermsCondition = () => {
     },[])
   return (
     <>
+        <MetaTag
+            title="Terms & Conditions - Lab Mantra"
+            description="Explore Lab Mantra's terms and conditions, including service agreements, user responsibilities, and more."
+            keyword="Lab Mantra, terms and conditions, service agreements"
+        />
         <section className="bread">
             <div className="container">
                 <nav aria-label="breadcrumb ">

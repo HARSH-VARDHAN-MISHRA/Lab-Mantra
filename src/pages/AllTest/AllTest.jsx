@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import MetaTag from '../../components/Meta/MetaTag';
 
 const AllTest = () => {
     const [tests, setTests] = useState([]);
@@ -152,6 +153,12 @@ const AllTest = () => {
 
     return (
         <>
+        <MetaTag
+            title="Lab Mantra Diagnostic Tests - Comprehensive Medical Imaging Services"
+            description="Explore the comprehensive range of diagnostic tests offered by Lab Mantra, including CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, and Thyroid Scan. Our services are designed to provide high-quality, accessible, and affordable healthcare to all Indian citizens."
+            keyword="Lab Mantra, diagnostic tests, CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, Thyroid Scan, medical imaging, healthcare services"
+        />
+
             <section className="bread">
                 <div className="container">
                     <nav aria-label="breadcrumb ">

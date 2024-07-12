@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import MetaTag from '../../components/Meta/MetaTag';
 
 const PrivacyPolicy = () => {
     useEffect(() => {
@@ -10,6 +11,11 @@ const PrivacyPolicy = () => {
     }, [])
   return (
     <>
+      <MetaTag
+          title="Privacy Policy - Lab Mantra"
+          description="Read our privacy policy to understand how Lab Mantra collects, uses, and protects your personal information."
+          keyword="Lab Mantra, privacy policy, personal information, data protection"
+      />
         <section className="bread">
             <div className="container">
                 <nav aria-label="breadcrumb ">
