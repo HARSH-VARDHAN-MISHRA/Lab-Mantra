@@ -29,7 +29,7 @@ const Contact = () => {
         setLoading(true);
         event.preventDefault();
         try {
-            const res = await axios.post("https://lab-mantra-backend.onrender.com/api/v1/apply-enquiry",formData);
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/apply-enquiry`,formData);
             toast.success(res.data.message);
             setFormData({
                 firstName: '',
@@ -40,7 +40,7 @@ const Contact = () => {
             })
             setSended(true);
         } catch (error) {
-            console.error("Error while Submit the Form",error);
+            console.error("Error while Submit the Form",error.response.data);
             toast.success(error.res)
         }finally{
             setLoading(false);

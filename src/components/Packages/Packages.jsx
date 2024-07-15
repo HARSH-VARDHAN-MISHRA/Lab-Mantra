@@ -20,7 +20,7 @@ const Packages = () => {
 
     const fetchPackageTitles = async () => {
         try {
-            const response = await axios.get('https://lab-mantra-backend.onrender.com/api/v1/get-all-package-title');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-package-title`);
             setPackageTitles(response.data.data);
             // console.log('Package Titles:', response.data.data); // Debug log
         } catch (error) {
@@ -32,7 +32,7 @@ const Packages = () => {
 
     const fetchPackages = async () => {
         try {
-            const response = await axios.get('https://lab-mantra-backend.onrender.com/api/v1/get-all-package');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-package`);
             setPackages(response.data.data);
             // console.log('Packages:', response.data.data); // Debug log
         } catch (error) {
@@ -44,7 +44,7 @@ const Packages = () => {
 
     const fetchTestCategories = async () => {
         try {
-            const response = await axios.get('https://lab-mantra-backend.onrender.com/api/v1/get-all-test-category');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test-category`);
             setTestCategories(response.data.data);
             // console.log('Test Categories:', response.data.data); // Debug log
         } catch (error) {

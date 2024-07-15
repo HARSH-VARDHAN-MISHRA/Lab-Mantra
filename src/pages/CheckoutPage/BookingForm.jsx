@@ -97,7 +97,7 @@ const BookingForm = () => {
     const fetchLabDetailsByCityAndPincode = async (pinCode, city) => {
         setLoading(true);
         try {
-            const response = await axios.get(`https://lab-mantra-backend.onrender.com/api/v1/lab-info-by-pincode?pinCode=${pinCode}&city=${city}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab-info-by-pincode?pinCode=${pinCode}&city=${city}`);
             setLabDetails(response.data);
             setError('');
         } catch (error) {

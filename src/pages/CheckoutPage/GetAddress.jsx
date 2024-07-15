@@ -33,7 +33,7 @@ const OrderSummary = () => {
     
         if (paymentOption === 'payOnline') {
             try {
-                const { data: { order } } = await axios.post("https://lab-mantra-backend.onrender.com/api/v1/Create-payment", 
+                const { data: { order } } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-payment`, 
                 {
                     amount: totalToPay,
                     OrderDetails: {
@@ -55,7 +55,7 @@ const OrderSummary = () => {
                     description: "Payment Of Products",
                     image: "https://i.ibb.co/nQw5cNf/logo.png",
                     order_id: order.id,
-                    callback_url: "https://lab-mantra-backend.onrender.com/api/v1/paymentverification",
+                    callback_url: `${process.env.REACT_APP_BACKEND_URL}/paymentverification`,
                     notes: {
                         "address": "Labmantra Pvt Ltd"
                     },

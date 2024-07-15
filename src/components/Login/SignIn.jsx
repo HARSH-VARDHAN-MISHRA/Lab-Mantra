@@ -31,7 +31,7 @@ const SignIn = () => {
         setLoading(true)
         event.preventDefault();
         try {
-            const response = await axios.post('https://lab-mantra-backend.onrender.com/api/v1/register',formData);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`,formData);
             console.log(response.data);
             setLoading(false)
             

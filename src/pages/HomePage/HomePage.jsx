@@ -28,7 +28,7 @@ const HomePage = () => {
   const [city, setCity] = useState(sessionStorage.getItem("city") || '');
   const fetchTest = async () => {
     try {
-      const res = await axios.get("https://lab-mantra-backend.onrender.com/api/v1/get-all-test");
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test`);
       setTests(res.data.data);
     } catch (error) {
       console.error("Something Issue to fetch Tests: ", error);

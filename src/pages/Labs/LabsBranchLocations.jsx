@@ -103,7 +103,7 @@ const LabsBranchLocations = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://lab-mantra-backend.onrender.com/api/v1/branch-lab-address-update', {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/branch-lab-address-update`, {
                 address,
                 pincode,
                 city,

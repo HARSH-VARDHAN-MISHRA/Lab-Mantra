@@ -15,7 +15,7 @@ const AllTest = () => {
 
     const fetchTests = async (page) => {
         try {
-            const res = await axios.get(`https://lab-mantra-backend.onrender.com/api/v1/get-all-test?page=${page}&limit=${itemsPerPage}`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test?page=${page}&limit=${itemsPerPage}`);
             setTests(res.data.data);
             setTotalItems(res.data.data.length || 0);
         } catch (error) {
