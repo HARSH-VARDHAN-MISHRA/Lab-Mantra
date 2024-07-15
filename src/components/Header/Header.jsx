@@ -107,9 +107,9 @@ const Header = () => {
                     )}
                 </div>
                 <div className="book-btn">
-                    <Link to="/book-test" >
+                    {/* <Link to="/book-test" >
                         Book a Test
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
 
