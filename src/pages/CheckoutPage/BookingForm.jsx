@@ -20,6 +20,8 @@ const BookingForm = () => {
         address: '',
         labName: '',
         labAddress: '',
+        labId:'',
+        labEmail:'',
         appointTime: '',
         bookingType: 'homeCollection' // To track the current booking type
     });
@@ -60,7 +62,11 @@ const BookingForm = () => {
             if (selectedLab) {
                 setFormData((prevFormData) => ({
                     ...prevFormData,
-                    labAddress: selectedLab.address
+                    labAddress: selectedLab.address,
+                    labEmail: selectedLab.email,
+                    labId: selectedLab._id,
+
+
                 }));
             }
         }
@@ -306,6 +312,16 @@ const BookingForm = () => {
                                                 id="labAddress"
                                                 className="form-control"
                                                 value={formData.labAddress}
+                                                readOnly
+                                            />
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="labAddress">Lab Email:</label>
+                                            <input
+                                                id="labEmail"
+                                                type='text'
+                                                className="form-control"
+                                                value={formData.labEmail}
                                                 readOnly
                                             />
                                         </div>

@@ -17,7 +17,7 @@ const OrderSummary = () => {
     }, []);
 
     const { cart, subtotal, homeCollectionCharges, discount, totalToPay } = cartDetails;
-
+    console.log("bookingFormData",bookingFormData)
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -25,7 +25,7 @@ const OrderSummary = () => {
         })
     }, [])
 
-    // ============================================= 
+    // //=======//=======//=======//=======//=======//========== 
     const [visibleTests, setVisibleTests] = useState({});
     const checkoutHandler = async (e) => {
         e.preventDefault();
@@ -48,7 +48,7 @@ const OrderSummary = () => {
                 });
     
                 const options = {
-                    key: "rzp_test_285YiZKcRm3PyP",
+                    key: "rzp_test_gU4w4jM7ASo0XA",
                     amount: order.totalToPay || 100,
                     currency: "INR",
                     name: "Lab Mantra",
@@ -71,15 +71,36 @@ const OrderSummary = () => {
                 // Handle error scenario
             }
         } else if (paymentOption === 'cashOnDelivery') {
-            // Handle cash on delivery scenario
-            const queryString = Object.keys(bookingFormData)
-                .map(key => {
-                    const encodedValue = encodeURIComponent(bookingFormData[key]);
-                    return `${key}=${encodedValue}`;
-                })
-                .join('&');
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-Cod-Orders`, 
+                {
+                    amount: totalToPay,
+                    OrderDetails: {
+                        TestInfos: bookingFormData,
+                        CartData: cartDetails
+                    }
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(response.data)
+      
+             
+            } catch (error) {
+                console.error('Error in creating order:', error);
+                // Handle error scenario
+            }
+            // // Handle cash on delivery scenario
+            // const queryString = Object.keys(bookingFormData)
+            //     .map(key => {
+            //         const encodedValue = encodeURIComponent(bookingFormData[key]);
+            //         return `${key}=${encodedValue}`;
+            //     })
+            //     .join('&');
     
-            navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
+            // navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
         }
     };
     
