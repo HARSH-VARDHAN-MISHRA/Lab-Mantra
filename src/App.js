@@ -30,6 +30,7 @@ import PrivacyPolicy from './pages/PolicyPages/PrivacyPolicy';
 import LabsBranchLocations from './pages/Labs/LabsBranchLocations';
 
 import ErrorPage from './pages/Error/ErrorPage';
+import SearchTestByNearLab from './pages/SearchTestByNearLab/SearchTestByNearLab';
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
 
             <Route path='/lab-tests' element={<AllTest />} />
             <Route path='/lab-tests/:testname' element={<SearchByTest />} />
+
+            <Route path='/find-your-test/:testName' element={<SearchTestByNearLab />} />
 
             <Route path='/our-packages' element={<PackagesPage />} />
             <Route path='/our-packages/:packagename' element={<PackageByTitlePage />} />

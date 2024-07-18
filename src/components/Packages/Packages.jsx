@@ -114,13 +114,14 @@ const Packages = () => {
 
                                         return (
                                             <div className="single-package" key={idx}>
+                                                {console.log(pack)}
                                                 <div className="main-head">
                                                     <h4>{pack.packageName}</h4>
                                                     <div className="flex">
                                                         <small>({pack.testGroupQuantity} Tests)</small>
                                                         <div className="price">
-                                                            <div className="current_price">{packageDetails.currentPrice}</div>
-                                                            <small className="actual_price">{packageDetails.actualPrice}</small>
+                                                            <div className="current_price">₹{packageDetails.currentPrice}</div>
+                                                            <small className="actual_price">₹{packageDetails.actualPrice}</small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,7 +160,7 @@ const Packages = () => {
                                         );
                                     })}
                                 </div>
-                                {item.packagesId.length > 3 && (
+                                {item.packagesId.length > 6 && (
                                     <div className="view-more-container">
                                         <button className='viewMoreBtn' onClick={() => handleViewMore(item.packageTitle)}>View More</button>
                                     </div>

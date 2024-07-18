@@ -48,7 +48,8 @@ const Header = () => {
 
     // Redirect to test details page
     const handleTestClick = (testName) => {
-        navigate(`/lab-tests/${testName.replace(/ /g, '-')}`);
+        // navigate(`/lab-tests/${testName.replace(/ /g, '-')}`);
+        navigate(`/find-your-test/${testName}`);
         setSearchTerm("")
     };
 

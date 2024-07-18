@@ -35,7 +35,7 @@ const Login = () => {
             navigate('/')
 
         } catch (error) {
-            console.log("Error While Login",error.response.data)
+            console.log("Error While Login",error)
             if (error.response && error.response.data) {
                 console.log("error.response",error)
                 console.log(error.response.data);

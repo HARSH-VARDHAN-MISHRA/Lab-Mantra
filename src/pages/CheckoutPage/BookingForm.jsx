@@ -293,7 +293,7 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <hr />
-                                        <div className="col-md-6">
+                                        {/* <div className="col-md-6">
                                             <label htmlFor="labName">Lab Name:<span className='text-danger'>*</span></label>
                                             <select
                                                 id="labName"
@@ -324,7 +324,7 @@ const BookingForm = () => {
                                                 value={formData.labEmail}
                                                 readOnly
                                             />
-                                        </div>
+                                        </div> */}
                                         <div className="col-md-6">
                                             <label htmlFor="appointTime">Preferred Time:</label>
                                             <select

@@ -4,7 +4,7 @@ import b2 from './banner-2.jpg';
 import b3 from './banner-3.jpg';
 import Head from '../../components/Head/Head';
 import OurServices from '../../components/OurServices/OurServices';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import Tests from '../../components/Tests/Tests';
 import Contact from '../../components/Contact/Contact';
@@ -14,6 +14,7 @@ import axios from 'axios';
 import MetaTag from '../../components/Meta/MetaTag';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [tests, setTests] = useState([]);
   const [visibleTests, setVisibleTests] = useState(12);
   const [cart, setCart] = useState([]);
@@ -143,10 +144,15 @@ const HomePage = () => {
 
   const sendRequirementInQuery = (e) => {
     e.preventDefault(); // Prevent the default form submission
-    window.location.href = `/Nearest-Lab?TestName=${testName.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
+    // window.location.href = `/Nearest-Lab?TestName=${testName.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
+    window.location.href = `/find-your-test/${testName}`;
   };
   const defaultCities = ["Delhi", "Kolkata", "Chennai", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Kanpur", "Nagpur", "Visakhapatnam", "Bhopal", "Patna", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut", "Rajkot", "Kalyan-Dombivli", "Vasai-Virar", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad"];
 
+  // ============= mm ===================== 
+  const SearchNearLabByTest = (testName) =>{
+      navigate(`/find-your-test/${testName}`)
+  }
   return (
     <>
       <MetaTag
@@ -303,7 +309,10 @@ const HomePage = () => {
                       </>
                     )}
                   </div>
-                  {cart.some(cartItem => cartItem._id === item._id) ? (
+                  <button onClick={() => SearchNearLabByTest(item.testName)} className="bookBtn">
+                      View Lab
+                  </button>
+                  {/* {cart.some(cartItem => cartItem._id === item._id) ? (
                     <button onClick={() => handleAddToCart(item)} className="bookBtn">
                       REMOVE
                     </button>
@@ -311,7 +320,7 @@ const HomePage = () => {
                     <button onClick={() => handleAddToCart(item)} className="bookBtn">
                       BOOK
                     </button>
-                  )}
+                  )} */}
                 </div>
                 {item.discountPercentage ? (
                   <div className="abso">

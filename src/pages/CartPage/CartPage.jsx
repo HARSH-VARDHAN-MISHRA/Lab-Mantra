@@ -22,9 +22,15 @@ const CartPage = () => {
     }, []);
 
     const handleRemoveFromCart = (itemId) => {
-        const updatedCart = cart.filter(item => item._id !== itemId);
+        // Filter out the item to be removed based on itemId (either _id or id)
+        const updatedCart = cart.filter(item => item._id !== itemId && item.id !== itemId);
+
+        // Update state with the filtered cart
         setCart(updatedCart);
+
+        // Update local storage with the filtered cart
         localStorage.setItem('lab-cart', JSON.stringify(updatedCart));
+        console.log(updatedCart);
     }
 
     const handleCouponApply = () => {
@@ -72,11 +78,11 @@ const CartPage = () => {
 
     return (
         <>
-        <MetaTag
-            title="Your Cart - Lab Mantra"
-            description="Review and manage the items in your cart at Lab Mantra. Ensure you have all the necessary tests and services before proceeding to checkout."
-            keyword="Lab Mantra, cart, healthcare services, medical tests, checkout"
-        />
+            <MetaTag
+                title="Your Cart - Lab Mantra"
+                description="Review and manage the items in your cart at Lab Mantra. Ensure you have all the necessary tests and services before proceeding to checkout."
+                keyword="Lab Mantra, cart, healthcare services, medical tests, checkout"
+            />
 
 
             {cart.length ? (
@@ -103,7 +109,7 @@ const CartPage = () => {
                             </div>
 
                             <div className="row">
-                                
+
 
                                 <div className="col-md-7">
                                     <div className="cart-items mb-4">
@@ -114,11 +120,11 @@ const CartPage = () => {
                                                         <>
                                                             <h5 className='test-name'>Test : <span className='fw-normal'>{item.testName}</span></h5>
                                                             <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
+
                                                         </>
                                                     )}
                                                     {item.packageName && (
                                                         <>
-                                                            
                                                             <h5 className='test-name'>Package : <span className='fw-normal'>{item.packageName}</span></h5>
                                                             <div className="text-muted">₹{item.currentPrice}</div>
                                                             <button className="re-btn fs-6 mt-2" onClick={() => handleViewPackageDetails(item._id)}>
@@ -137,7 +143,7 @@ const CartPage = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <button className="re-btn" onClick={() => handleRemoveFromCart(item._id)}>
+                                                <button className="re-btn" onClick={() => handleRemoveFromCart(item._id || item.id)}>
                                                     <i className="fa-solid fa-trash-can"></i>
                                                 </button>
                                             </div>

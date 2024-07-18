@@ -334,7 +334,7 @@ header nav .closeToggleMenu {
     overflow-y: auto;
     background: var(--bg-head);
     width: 40%;
-    z-index: 999;
+    z-index: 2500;
     transition: all 300ms ease-in;
 }
 .side-navbar .inside{

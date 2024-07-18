@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MetaTag from '../../components/Meta/MetaTag';
 
 const AllTest = () => {
@@ -12,6 +12,7 @@ const AllTest = () => {
     const [cart, setCart] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
+    const navigate = useNavigate();
 
     const fetchTests = async (page) => {
         try {
@@ -151,6 +152,11 @@ const AllTest = () => {
         setSearchTerm(event.target.value);
     }
 
+
+    // --------------------------- SearchNearLabByTest  ----------------------------------
+    const SearchNearLabByTest = (testName) =>{
+        navigate(`/find-your-test/${testName}`)
+    }
     return (
         <>
         <MetaTag
@@ -209,7 +215,10 @@ const AllTest = () => {
                                                     </>
                                                 )}
                                             </div>
-                                            {cart.some(cartItem => cartItem._id === item._id) ? (
+                                            <button onClick={() => SearchNearLabByTest(item.testName)} className="bookBtn">
+                                                View Lab
+                                            </button>
+                                            {/* {cart.some(cartItem => cartItem._id === item._id) ? (
                                                 <button onClick={() => handleAddToCart(item)} className="bookBtn">
                                                     REMOVE
                                                 </button>
@@ -217,7 +226,7 @@ const AllTest = () => {
                                                 <button onClick={() => handleAddToCart(item)} className="bookBtn">
                                                     BOOK
                                                 </button>
-                                            )}
+                                            )} */}
                                         </div>
                                         {item.discountPercentage ? (
                                             <div className="abso">
